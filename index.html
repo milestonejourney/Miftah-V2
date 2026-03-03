@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-text-size="md" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Miftah — A structured deep-study companion for Surah Al-Mulk">
+  <title>Miftah · Surah Al-Mulk</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!--
+    Firebase compat SDK — loaded with defer, before our firebase-client.js.
+    Defer preserves execution order, so these run before any of our scripts.
+    No ES modules. No import/export. Global firebase.* API.
+  -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js" defer></script>
+
+  <!--
+    GROUP 1: Data constants — no dependencies, declare globals only
+    Each file declares exactly one const and nothing else.
+  -->
+  <script src="js/data/surah-67.js" defer></script>
+  <script src="js/data/tafsir-67.js" defer></script>
+  <script src="js/data/morphology-67.js" defer></script>
+  <script src="js/data/lens-67.js" defer></script>
+
+  <!--
+    GROUP 2: Services — depend on data globals
+  -->
+  <script src="js/services/data-service.js" defer></script>
+  <script src="js/services/store.js" defer></script>
+  <script src="js/services/firebase-client.js" defer></script>
+  <script src="js/services/sync.js" defer></script>
+
+  <!--
+    GROUP 3: Core utilities — depend on store
+  -->
+  <script src="js/core/i18n.js" defer></script>
+  <script src="js/core/theme.js" defer></script>
+  <script src="js/core/settings.js" defer></script>
+
+  <!--
+    GROUP 4: Pages — depend on services + core
+  -->
+  <script src="js/pages/auth.js" defer></script>
+  <script src="js/pages/onboarding.js" defer></script>
+  <script src="js/pages/overview.js" defer></script>
+  <script src="js/pages/study.js" defer></script>
+  <script src="js/pages/vocab.js" defer></script>
+  <script src="js/pages/action.js" defer></script>
+  <script src="js/pages/journal.js" defer></script>
+
+  <!--
+    GROUP 5: App shell — last. May call any function. Nothing loads after it.
+  -->
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOP NAV
+       Hidden on login/onboarding. JS controls style.display.
+       ════════════════════════════════════════════════════════ -->
+  <nav id="mainNav" style="display:none" role="navigation" aria-label="Main navigation">
+
+    <!-- Left: Brand -->
+    <div class="nav-brand">
+      <span class="nav-brand-arabic">مفتاح</span>
+      <span class="nav-brand-latin">Miftah</span>
+    </div>
+
+    <!-- Centre: Ayah selector dropdown (study page only) -->
+    <div id="navCenter" style="display:none">
+      <button class="ayah-selector-btn"
+              onclick="toggleDropdown()"
+              aria-haspopup="listbox"
+              aria-label="Select ayah">
+        <span id="ayah-current-display">Ayah 1</span>
+        <span class="dropdown-arrow" id="dropdown-arrow">▾</span>
+      </button>
+      <div id="ayah-dropdown"
+           class="ayah-dropdown-list"
+           role="listbox"
+           aria-label="Ayah selection">
+        <!-- 30 buttons rendered by study.js -->
+      </div>
+    </div>
+
+    <!-- Right: user info + settings -->
+    <div class="nav-right">
+      <span id="nav-user-email"></span>
+      <button class="nav-icon-btn"
+              onclick="toggleSettings()"
+              aria-label="Settings"
+              title="Settings">⚙</button>
+    </div>
+
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       BOTTOM NAV
+       data-page is the routing key. One attr, one comparison.
+       ════════════════════════════════════════════════════════ -->
+  <nav id="bottomNav" style="display:none" role="navigation" aria-label="Section navigation">
+
+    <button class="bottom-nav-btn" data-page="overview" onclick="showPage('overview')" aria-label="Overview">
+      <span class="bnb-icon">◈</span>
+      <span class="bnb-label" data-i18n="nav_overview">Overview</span>
+    </button>
+
+    <button class="bottom-nav-btn" data-page="study" onclick="showPage('study')" aria-label="Study">
+      <span class="bnb-icon">✦</span>
+      <span class="bnb-label" data-i18n="nav_study">Study</span>
+    </button>
+
+    <button class="bottom-nav-btn" data-page="vocab" onclick="showPage('vocab')" aria-label="Vocabulary">
+      <span class="bnb-icon">⟡</span>
+      <span class="bnb-label" data-i18n="nav_vocab">Vocab</span>
+    </button>
+
+    <button class="bottom-nav-btn" data-page="action" onclick="showPage('action')" aria-label="Action plan">
+      <span class="bnb-icon">◎</span>
+      <span class="bnb-label" data-i18n="nav_actions">Actions</span>
+    </button>
+
+    <button class="bottom-nav-btn" data-page="journal" onclick="showPage('journal')" aria-label="Journal">
+      <span class="bnb-icon">≋</span>
+      <span class="bnb-label" data-i18n="nav_journal">Journal</span>
+    </button>
+
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SETTINGS PANEL (slide-in from right)
+       ════════════════════════════════════════════════════════ -->
+  <div class="settings-backdrop" id="settings-backdrop" onclick="closeSettings()"></div>
+
+  <aside id="settings-panel" role="dialog" aria-label="Settings" aria-modal="true">
+
+    <div id="settings-user-email"></div>
+
+    <!-- Language -->
+    <section>
+      <p class="settings-section-title">Language</p>
+      <div class="settings-btn-group">
+        <button class="settings-btn settings-lang-btn active"
+                onclick="setLang('en')"
+                data-lang-btn="en">English</button>
+        <button class="settings-btn settings-lang-btn"
+                onclick="setLang('ur')"
+                data-lang-btn="ur">اردو</button>
+        <button class="settings-btn settings-lang-btn"
+                onclick="setLang('hi')"
+                data-lang-btn="hi">हिंदी</button>
+      </div>
+    </section>
+
+    <!-- Theme -->
+    <section>
+      <p class="settings-section-title">Theme</p>
+      <div class="settings-btn-group">
+        <button class="settings-btn active"
+                onclick="setTheme('dark')"
+                data-theme-btn="dark">Dark</button>
+        <button class="settings-btn"
+                onclick="setTheme('light')"
+                data-theme-btn="light">Light</button>
+      </div>
+    </section>
+
+    <!-- Text size -->
+    <section>
+      <p class="settings-section-title">Text Size</p>
+      <div class="settings-btn-group">
+        <button class="settings-btn"
+                onclick="setTextSize('sm')"
+                data-size-btn="sm"
+                style="font-size:12px">A−</button>
+        <button class="settings-btn active"
+                onclick="setTextSize('md')"
+                data-size-btn="md">A</button>
+        <button class="settings-btn"
+                onclick="setTextSize('lg')"
+                data-size-btn="lg"
+                style="font-size:18px">A+</button>
+      </div>
+    </section>
+
+    <!-- Sign out -->
+    <button class="settings-signout"
+            onclick="signOut()"
+            data-i18n="sign_out">Sign out</button>
+
+  </aside>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PAGE: LOGIN
+       Default active page. auth.js handles all logic here.
+       ════════════════════════════════════════════════════════ -->
+  <main id="page-login" class="page active" role="main">
+    <div class="auth-wrapper">
+
+      <!-- Brand -->
+      <div class="auth-brand">
+        <div class="auth-brand-arabic">مفتاح</div>
+        <div class="auth-brand-latin">Miftah</div>
+        <div class="auth-tagline" data-i18n="tagline">Your key to deeper Quranic study</div>
+      </div>
+
+      <!-- Auth card -->
+      <div class="auth-card">
+
+        <!-- Tabs -->
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active"
+                  id="tab-signin"
+                  role="tab"
+                  aria-selected="true"
+                  onclick="showAuthView('signin')">Sign In</button>
+          <button class="auth-tab"
+                  id="tab-signup"
+                  role="tab"
+                  aria-selected="false"
+                  onclick="showAuthView('signup')">Create Account</button>
+        </div>
+
+        <!-- Error message (shared across views) -->
+        <div class="auth-error" id="auth-error" role="alert"></div>
+
+        <!-- View: Sign In -->
+        <div class="auth-view" id="auth-view-signin" role="tabpanel">
+          <div class="auth-field">
+            <label class="auth-label" for="signin-email" data-i18n="email_label">Email Address</label>
+            <input class="auth-input"
+                   id="signin-email"
+                   type="email"
+                   autocomplete="email"
+                   placeholder="you@example.com">
+          </div>
+          <div class="auth-field">
+            <label class="auth-label" for="signin-password" data-i18n="password_label">Password</label>
+            <input class="auth-input"
+                   id="signin-password"
+                   type="password"
+                   autocomplete="current-password"
+                   placeholder="••••••••">
+          </div>
+          <button class="auth-submit-btn"
+                  id="signin-btn"
+                  onclick="handleSignIn()">
+            <span data-i18n="sign_in_btn">Sign In →</span>
+          </button>
+          <div class="auth-link-row">
+            <button class="auth-link" onclick="showAuthView('signup')" data-i18n="create_account_link">Create an account</button>
+            <button class="auth-link" onclick="showAuthView('reset')" data-i18n="forgot_password">Forgot password?</button>
+          </div>
+        </div>
+
+        <!-- View: Create Account -->
+        <div class="auth-view hidden" id="auth-view-signup" role="tabpanel">
+          <div class="auth-field">
+            <label class="auth-label" for="signup-email" data-i18n="email_label">Email Address</label>
+            <input class="auth-input"
+                   id="signup-email"
+                   type="email"
+                   autocomplete="email"
+                   placeholder="you@example.com">
+          </div>
+          <div class="auth-field">
+            <label class="auth-label" for="signup-password" data-i18n="password_label">Password</label>
+            <input class="auth-input"
+                   id="signup-password"
+                   type="password"
+                   autocomplete="new-password"
+                   placeholder="••••••••">
+          </div>
+          <div class="auth-field">
+            <label class="auth-label" for="signup-confirm" data-i18n="confirm_password">Confirm Password</label>
+            <input class="auth-input"
+                   id="signup-confirm"
+                   type="password"
+                   autocomplete="new-password"
+                   placeholder="••••••••">
+          </div>
+          <button class="auth-submit-btn"
+                  id="signup-btn"
+                  onclick="handleSignUp()">
+            <span data-i18n="create_account_btn">Create Account →</span>
+          </button>
+          <div class="auth-link-row">
+            <button class="auth-link" onclick="showAuthView('signin')" data-i18n="sign_in_link">Sign in</button>
+          </div>
+        </div>
+
+        <!-- View: Reset Password -->
+        <div class="auth-view hidden" id="auth-view-reset" role="tabpanel">
+          <div class="auth-field">
+            <label class="auth-label" for="reset-email" data-i18n="email_label">Email Address</label>
+            <input class="auth-input"
+                   id="reset-email"
+                   type="email"
+                   autocomplete="email"
+                   placeholder="you@example.com">
+          </div>
+          <button class="auth-submit-btn"
+                  id="reset-btn"
+                  onclick="handleResetPassword()">
+            <span data-i18n="send_reset_btn">Send Reset Link →</span>
+          </button>
+          <div class="auth-link-row">
+            <button class="auth-link" onclick="showAuthView('signin')" data-i18n="back_to_signin">← Back to Sign In</button>
+          </div>
+        </div>
+
+        <!-- View: Check Email (after signup) -->
+        <div class="auth-view hidden" id="auth-view-check-email" role="tabpanel">
+          <div class="auth-confirmation">
+            <div class="auth-confirmation-title" data-i18n="check_email_title">Check your email</div>
+            <div class="auth-confirmation-body">
+              <span data-i18n="check_email_text">We sent a confirmation link to</span>
+              <strong id="auth-confirm-email"></strong>
+            </div>
+            <div class="auth-confirmation-body" data-i18n="confirm_then_signin">Click it to activate your account, then come back to sign in.</div>
+            <button class="auth-link" onclick="showAuthView('signin')" data-i18n="back_to_signin">← Back to Sign In</button>
+          </div>
+        </div>
+
+        <!-- View: Reset Sent -->
+        <div class="auth-view hidden" id="auth-view-reset-sent" role="tabpanel">
+          <div class="auth-confirmation">
+            <div class="auth-confirmation-title" data-i18n="reset_sent_title">Reset link sent</div>
+            <div class="auth-confirmation-body">
+              <span data-i18n="reset_sent_text">We sent a password reset link to</span>
+              <strong id="auth-reset-email"></strong>
+            </div>
+            <div class="auth-confirmation-body" data-i18n="reset_check_inbox">Check your inbox and follow the link to reset your password.</div>
+            <button class="auth-link" onclick="showAuthView('signin')" data-i18n="back_to_signin">← Back to Sign In</button>
+          </div>
+        </div>
+
+      </div><!-- /.auth-card -->
+
+      <!-- Guest entry -->
+      <div class="auth-divider">or</div>
+      <button class="auth-guest-btn" onclick="continueAsGuest()">Continue as Guest</button>
+
+    </div><!-- /.auth-wrapper -->
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PAGE: ONBOARDING
+       One-time. 5 lens cards. Begin routes to overview.
+       ════════════════════════════════════════════════════════ -->
+  <main id="page-onboarding" class="page" role="main">
+    <div class="ob-container">
+
+      <!-- Step 1: Welcome -->
+      <div class="ob-step-content active" id="ob-step-1">
+        <div class="ob-header">
+          <h1 class="ob-title" data-i18n="ob_welcome">Welcome to Miftah</h1>
+          <p class="ob-subtitle" data-i18n="ob_subtitle">A different way to engage with the Quran</p>
+        </div>
+        <p class="ob-desc" data-i18n="ob_desc">
+          Miftah is a study companion for intermediate Arabic students who want to go beyond translation — into grammar, tafsir, personal reflection, and memorisation. Built around the methodology of Ustadh Nouman Ali Khan's 5 Lenses framework from Bayyinah.
+        </p>
+        <blockquote class="ob-quote" data-i18n="ob_heart_quote">
+          "All study passes through a filter that makes it meaningful or renders it useless. That filter is the heart."
+        </blockquote>
+      </div>
+
+      <!-- Step 2: The 5 Lenses -->
+      <div class="ob-step-content" id="ob-step-2">
+        <p class="ob-section-label" data-i18n="ob_methodology">The Methodology</p>
+        <div class="ob-header">
+          <h2 class="ob-title" data-i18n="ob_5lenses">5 Lenses to reflect upon the Quran</h2>
+          <p class="ob-subtitle" data-i18n="ob_5lenses_desc">Each ayah can be explored through five distinct lenses. One tab, one focus at a time.</p>
+        </div>
+        <!-- Lens cards rendered by onboarding.js -->
+        <div id="ob-lens-cards"></div>
+      </div>
+
+      <!-- Step 3: Ready -->
+      <div class="ob-step-content" id="ob-step-3">
+        <div class="ob-header">
+          <h2 class="ob-title" data-i18n="ob_ready">Ready</h2>
+          <p class="ob-subtitle" data-i18n="ob_journey_begins">Your journey through Surah Al Mulk begins.</p>
+        </div>
+        <p class="ob-desc" data-i18n="ob_pace">
+          30 ayahs. 5 lenses each. Your notes saved as you go. Work at your pace. Return anytime.
+        </p>
+        <button class="modal-btn-primary" onclick="beginFromOnboarding()" data-i18n="ob_open_surah">
+          Open the Surah ✦
+        </button>
+      </div>
+
+      <!-- Footer navigation -->
+      <div class="ob-footer">
+        <button class="modal-btn-secondary"
+                id="ob-back-btn"
+                onclick="obStep(-1)"
+                data-i18n="ob_back"
+                style="display:none">← Back</button>
+        <button class="modal-btn-primary"
+                id="ob-next-btn"
+                onclick="obStep(1)"
+                data-i18n="ob_next">Let's begin →</button>
+      </div>
+
+    </div><!-- /.ob-container -->
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PAGE: OVERVIEW
+       30-tile ayah grid. JS renders tiles into #ayah-grid.
+       ════════════════════════════════════════════════════════ -->
+  <main id="page-overview" class="page" role="main">
+
+    <div class="overview-header">
+      <h1 class="overview-surah-name" data-i18n="overview_surah">Surah Al-Mulk</h1>
+      <div class="overview-meta">
+        <span class="overview-meta-item" data-i18n="overview_makkan">Makkan</span>
+        <span class="overview-meta-dot"></span>
+        <span class="overview-meta-item">30 Ayahs</span>
+        <span class="overview-meta-dot"></span>
+        <span class="overview-meta-item" data-i18n="overview_subtitle">The Sovereignty</span>
+      </div>
+      <div class="overview-progress-bar">
+        <div class="overview-progress-fill" id="overview-progress-fill" style="width:0%"></div>
+      </div>
+      <p class="overview-progress-label" id="overview-progress-label">0 of 30 complete</p>
+    </div>
+
+    <p class="overview-intro" data-i18n="overview_intro">
+      Known as Al-Munjiyah (The Rescuer), this surah protects its reader from the punishment of the grave. The Prophet ﷺ would not sleep until he recited it. Begin your study journey by selecting any ayah below.
+    </p>
+
+    <div id="ayah-grid" role="list" aria-label="Ayah grid">
+      <!-- 30 tiles rendered by overview.js -->
+    </div>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PAGE: STUDY
+       The core study experience. study.js owns this page.
+       ════════════════════════════════════════════════════════ -->
+  <main id="page-study" class="page" role="main">
+
+    <!-- Ayah display -->
+    <div class="study-ayah">
+      <p class="study-ayah-counter">
+        <span id="ayah-num-display">1</span>
+        <span data-i18n="ayah_of"> of </span>
+        <span>30</span>
+      </p>
+      <p class="study-arabic" id="study-arabic" dir="rtl" lang="ar"></p>
+      <p class="study-transliteration" id="study-transliteration"></p>
+      <p class="study-translation translation" id="study-translation"></p>
+
+      <!-- Controls: audio + memorize -->
+      <div class="study-controls">
+        <button class="study-ctrl-btn" id="audio-btn" onclick="playAudio()">
+          <span>▶</span>
+          <span data-i18n="recite">Recite</span>
+        </button>
+        <button class="study-ctrl-btn" id="memorize-btn" onclick="toggleMemorize()">
+          <span>👁</span>
+          <span data-i18n="study_mode">Study Mode</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tafsir section -->
+    <div class="study-tafsir" id="study-tafsir">
+      <div class="tafsir-header" onclick="toggleTafsir()" role="button" aria-expanded="false">
+        <span class="tafsir-label" data-i18n="tafsir_label">Tafsir</span>
+        <span class="tafsir-toggle-btn">
+          <span id="tafsir-toggle-text" data-i18n="detailed_commentary">Detailed Commentary</span>
+          <span class="tafsir-chevron">▾</span>
+        </span>
+      </div>
+      <p class="tafsir-summary" id="tafsir-summary"></p>
+      <p id="tafsir-lang-note" style="display:none;font-size:11px;color:var(--text-tertiary);font-family:system-ui,sans-serif;letter-spacing:0.04em;padding:4px 0 2px">Tafsir sources are in English (Ibn Kathir · Tabari · Qurtubi · Bayyinah)</p>
+      <div class="tafsir-detail" id="tafsir-detail" aria-hidden="true">
+        <div class="tafsir-detail-inner" id="tafsir-detail-inner"></div>
+        <div class="tafsir-sources" id="tafsir-sources"></div>
+      </div>
+    </div>
+
+    <!-- Lens tabs -->
+    <div class="lens-tabs-wrapper">
+      <div id="lens-tabs" role="tablist" aria-label="Study lenses">
+        <button class="lens-tab active"
+                data-lens="1"
+                role="tab"
+                aria-selected="true"
+                onclick="switchLens(1)">
+          <span class="lens-tab-num">1</span>
+          <span class="lens-tab-name" data-i18n="lens1_name">Wording</span>
+        </button>
+        <button class="lens-tab"
+                data-lens="2"
+                role="tab"
+                aria-selected="false"
+                onclick="switchLens(2)">
+          <span class="lens-tab-num">2</span>
+          <span class="lens-tab-name" data-i18n="lens2_name">World</span>
+        </button>
+        <button class="lens-tab"
+                data-lens="3"
+                role="tab"
+                aria-selected="false"
+                onclick="switchLens(3)">
+          <span class="lens-tab-num">3</span>
+          <span class="lens-tab-name" data-i18n="lens3_name">My Exp.</span>
+        </button>
+        <button class="lens-tab"
+                data-lens="4"
+                role="tab"
+                aria-selected="false"
+                onclick="switchLens(4)">
+          <span class="lens-tab-num">4</span>
+          <span class="lens-tab-name" data-i18n="lens4_name">Connections</span>
+        </button>
+        <button class="lens-tab"
+                data-lens="5"
+                role="tab"
+                aria-selected="false"
+                onclick="switchLens(5)">
+          <span class="lens-tab-num">5</span>
+          <span class="lens-tab-name" data-i18n="lens5_name">Lessons</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Lens content area — study.js renders into this -->
+    <div class="lens-content-wrapper">
+      <div id="lens-content" role="tabpanel"></div>
+    </div>
+
+    <!-- Notes textarea -->
+    <div class="lens-notes-wrapper">
+      <div class="lens-notes-label">
+        <span class="lens-notes-title" data-i18n="notes_label">Notes</span>
+        <span class="lens-notes-saved" id="lens-notes-saved" data-i18n="saved_indicator">✓ Saved</span>
+      </div>
+      <textarea id="lens-notes"
+                rows="6"
+                aria-label="Study notes"></textarea>
+    </div>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PAGE: VOCAB
+       Saved word cards. vocab.js renders into #vocab-list.
+       ════════════════════════════════════════════════════════ -->
+  <main id="page-vocab" class="page" role="main">
+
+    <div class="vocab-header">
+      <h1 class="vocab-title" data-i18n="vocab_title">Vocabulary Bank</h1>
+      <p class="vocab-subtitle" data-i18n="vocab_subtitle">Words saved from your study of Surah Al Mulk</p>
+      <p class="vocab-count" id="vocab-count"></p>
+    </div>
+
+    <div id="vocab-list" role="list"></div>
+    <p id="vocab-empty" class="vocab-empty" data-i18n="vocab_empty" style="display:none">No words saved yet. Tap any word while studying to save it here.</p>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PAGE: ACTION
+       Single textarea. action.js handles auto-save.
+       ════════════════════════════════════════════════════════ -->
+  <main id="page-action" class="page" role="main">
+
+    <div class="action-header">
+      <h1 class="action-title" data-i18n="action_title">Personal Action Plan</h1>
+      <p class="action-hint" data-i18n="action_hint">
+        Use this space to note any actions the Surah has called you to and changes you're inspired to make from today.
+      </p>
+    </div>
+
+    <div class="action-body">
+      <textarea id="action-textarea"
+                rows="12"
+                aria-label="Action plan notes"
+                oninput="handleActionInput()"></textarea>
+      <p class="action-saved-indicator" id="action-saved" data-i18n="saved_indicator">✓ Saved</p>
+    </div>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PAGE: JOURNAL
+       All notes. journal.js renders entries into #journal-entries.
+       ════════════════════════════════════════════════════════ -->
+  <main id="page-journal" class="page" role="main">
+
+    <div class="journal-header">
+      <h1 class="journal-title" data-i18n="journal_title">Study Journal</h1>
+      <p class="journal-subtitle" data-i18n="journal_subtitle">Your complete tadabbur journey — all lenses, all ayahs</p>
+    </div>
+
+    <!-- Heart filter intention note -->
+    <div class="journal-heart-note" id="journal-heart-section">
+      <p class="journal-heart-label">Opening Intention</p>
+      <p class="journal-heart-text" id="journal-heart-text"></p>
+    </div>
+
+    <!-- Per-ayah entries — rendered by journal.js -->
+    <div id="journal-entries" role="list"></div>
+
+    <!-- Final reflection textarea -->
+    <div class="journal-final">
+      <p class="journal-final-label" data-i18n="final_reflection">Final Reflection</p>
+      <p id="journal-final-saved" style="font-size:11px;color:var(--text-tertiary);font-family:system-ui,sans-serif;letter-spacing:0.06em;opacity:0;transition:opacity 0.3s;margin-bottom:6px">✓ Saved</p>
+      <textarea id="journal-final-reflection"
+                rows="6"
+                aria-label="Final reflection"
+                oninput="handleFinalReflectionInput()"
+                placeholder="After completing all 30 ayahs, write your closing reflection here…"></textarea>
+    </div>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       MODAL: HEART FILTER
+       First study entry per session. One-time.
+       ════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="heart-modal" role="dialog" aria-modal="true" aria-labelledby="heart-modal-title">
+    <div class="modal-box">
+      <p class="modal-subtitle" data-i18n="heart_filter_title">Heart Filter · Surah Al-Mulk</p>
+      <h2 class="modal-title" id="heart-modal-title" data-i18n="heart_filter_before">Before you begin</h2>
+      <p class="modal-body" data-i18n="heart_filter_body">
+        You are about to open Surah Al-Mulk for deep study. Before the first ayah, pause for a moment. What do you bring with you? What do you hope to find?
+      </p>
+      <p class="modal-body" style="font-size:14px; color: var(--text-tertiary)" data-i18n="heart_filter_journal">
+        This will be the opening entry in your Study Journal.
+      </p>
+      <textarea class="modal-textarea"
+                id="heart-note-input"
+                rows="4"
+                aria-label="Intention note"
+                placeholder="Write your intention here…"></textarea>
+      <button class="modal-btn-primary" onclick="submitHeartFilter()" data-i18n="begin_session">
+        Begin Study Session
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       MODAL: WORD DETAIL (Lens 1 — Wording)
+       Opens when user taps a word chip. study.js populates.
+       ════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="word-popup" role="dialog" aria-modal="true" aria-labelledby="word-popup-arabic">
+    <div class="modal-box">
+
+      <!-- Arabic word + gloss -->
+      <p class="word-popup-arabic" id="word-popup-arabic"></p>
+      <p class="word-popup-gloss" id="word-popup-gloss"></p>
+
+      <!-- Root + POS -->
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+        <div class="word-popup-root">
+          <span class="word-popup-root-label">Root</span>
+          <span class="word-popup-root-arabic" id="word-popup-root"></span>
+        </div>
+        <span class="word-popup-pos-badge" id="word-popup-pos"></span>
+      </div>
+
+      <!-- Form + I'rab grid -->
+      <div class="word-popup-grid">
+        <div class="word-popup-field">
+          <p class="word-popup-field-label">Morphological Form</p>
+          <p class="word-popup-field-value" id="word-popup-form"></p>
+        </div>
+        <div class="word-popup-field">
+          <p class="word-popup-field-label">I'rab</p>
+          <p class="word-popup-field-value" id="word-popup-irab"></p>
+        </div>
+      </div>
+
+      <!-- Segments (if any) -->
+      <div class="word-popup-field" id="word-popup-segments-wrapper">
+        <p class="word-popup-field-label">Segments</p>
+        <p class="word-popup-field-value" id="word-popup-segments"></p>
+      </div>
+
+      <!-- Bayyinah note -->
+      <blockquote class="word-popup-note" id="word-popup-note"></blockquote>
+
+      <!-- Actions -->
+      <div class="word-popup-actions">
+        <button class="modal-btn-primary" id="word-vocab-btn" onclick="saveWordToVocab()" data-i18n="save_vocab">
+          Save to Vocab
+        </button>
+        <button class="modal-btn-secondary" onclick="closeWordPopup()">Close</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       MODAL: COMPLETION CELEBRATION
+       Fires when all 150 lens notes are non-empty.
+       ════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="completion-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="completion-icon">✦</div>
+      <h2 class="completion-title" data-i18n="journey_complete">Journey Complete</h2>
+      <p class="completion-body" data-i18n="journey_complete_body">
+        You have studied all 30 ayahs through all 5 lenses. This is no small thing. Your journal now holds a complete record of this journey.
+      </p>
+      <p class="completion-body" style="font-size:15px; color:var(--text-tertiary)" data-i18n="journey_final_cta">
+        Head to the Journal to write your Final Reflection — the closing entry of this journey.
+      </p>
+      <button class="modal-btn-primary" onclick="openJournalFromCompletion()" data-i18n="open_journal">
+        Open Journal ✦
+      </button>
+      <button class="modal-btn-secondary" onclick="closeCompletionModal()" data-i18n="continue_studying">
+        Continue Studying
+      </button>
+    </div>
+  </div>
+
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .catch(() => {}); // silent fail on file:// or dev environments
+      });
+    }
+  </script>
+</body>
+</html>
