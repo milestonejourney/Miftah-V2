@@ -19,9 +19,11 @@ const DataService = {
     if (!ayah)   throw new Error('DataService.getAyah: ayah ' + num + ' not found');
     if (!tafsir) throw new Error('DataService.getAyah: tafsir ' + num + ' not found');
     return Object.assign({}, ayah, {
-      summary: tafsir.summary,
-      detail:  tafsir.detail,
-      sources: tafsir.sources
+      summary:    tafsir.summary,
+      summary_ur: tafsir.summary_ur || '',
+      detail:     tafsir.detail,
+      detail_ur:  tafsir.detail_ur  || '',
+      sources:    tafsir.sources
     });
   },
 
@@ -47,6 +49,15 @@ const DataService = {
   // Returns total ayah count (convenience — avoids direct SURAH_67 access)
   getAyahCount() {
     return SURAH_67.length;
+  },
+
+  // Returns surah-level metadata.
+  // hasBismillah: false only for Surah 9 (At-Tawbah). True for all others.
+  // Extend this when the surah registry is built.
+  getSurahMeta() {
+    return {
+      hasBismillah: true   // Surah 67 — Al-Mulk
+    };
   }
 
 };

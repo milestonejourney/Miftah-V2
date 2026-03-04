@@ -55,6 +55,18 @@ function _renderAyahDisplay(ayah) {
 
   // Build word spans for memorize mode word-by-word reveal
   if (arabicEl) {
+    // Remove any existing bismillah first — always, before re-evaluating
+    const existing = arabicEl.parentNode.querySelector('.study-bismillah');
+    if (existing) existing.remove();
+
+    // Bismillah ornament — shown above Ayah 1 for surahs that begin with it
+    if (ayah.num === 1 && DataService.getSurahMeta().hasBismillah) {
+      const bism = document.createElement('div');
+      bism.className = 'study-bismillah';
+      bism.textContent = '﷽';
+      arabicEl.parentNode.insertBefore(bism, arabicEl);
+    }
+
     arabicEl.innerHTML = '';
     const words = ayah.arabic.split(' ');
     words.forEach((word, idx) => {
@@ -76,16 +88,33 @@ function _renderTafsir(ayah) {
   const detailEl  = document.getElementById('tafsir-detail-inner');
   const sourcesEl = document.getElementById('tafsir-sources');
 
-  if (summaryEl) summaryEl.innerHTML = ayah.summary || '';
-  if (detailEl)  detailEl.innerHTML  = ayah.detail  || '';
+  // Use Urdu summary when language is ur or hi, fallback to English
+  const lang = (typeof currentLang !== 'undefined' ? currentLang : 'en');
+  const isUrdu = (lang === 'ur');   // Urdu Nastaliq only — Hindi uses English tafsir
+  const summaryText = (isUrdu && ayah.summary_ur) ? ayah.summary_ur : ayah.summary;
 
-  // Tafsir data is English-only (classical scholarship sources).
-  // Show a subtle note when user is in a non-English language.
-  const tafsirLangNote = document.getElementById('tafsir-lang-note');
-  if (tafsirLangNote) {
-    const isEn = (typeof currentLang !== 'undefined' ? currentLang : 'en') === 'en';
-    tafsirLangNote.style.display = isEn ? 'none' : 'block';
+  if (summaryEl) {
+    summaryEl.innerHTML = summaryText || '';
+    // Urdu summary needs RTL + Nastaliq font
+    summaryEl.style.direction    = isUrdu ? 'rtl' : '';
+    summaryEl.style.textAlign    = isUrdu ? 'right' : '';
+    summaryEl.style.fontFamily   = isUrdu ? "'Noto Nastaliq Urdu', serif" : '';
+    summaryEl.style.lineHeight   = isUrdu ? '2.4' : '';
+    summaryEl.style.fontSize     = isUrdu ? 'calc(var(--sz-tafsir) * 0.95)' : '';
   }
+  if (detailEl) {
+    const detailText = (isUrdu && ayah.detail_ur) ? ayah.detail_ur : ayah.detail;
+    detailEl.innerHTML = detailText || '';
+    detailEl.style.direction  = (isUrdu && ayah.detail_ur) ? 'rtl' : '';
+    detailEl.style.textAlign  = (isUrdu && ayah.detail_ur) ? 'right' : '';
+    detailEl.style.fontFamily = (isUrdu && ayah.detail_ur) ? "'Noto Nastaliq Urdu', serif" : '';
+    detailEl.style.lineHeight = (isUrdu && ayah.detail_ur) ? '2.4' : '';
+    detailEl.style.fontSize   = (isUrdu && ayah.detail_ur) ? 'calc(var(--sz-tafsir) * 0.95)' : '';
+  }
+
+  // Hide the "English only" note now that summaries are translated
+  const tafsirLangNote = document.getElementById('tafsir-lang-note');
+  if (tafsirLangNote) tafsirLangNote.style.display = 'none';
 
   if (sourcesEl && ayah.sources) {
     sourcesEl.innerHTML = ayah.sources
@@ -197,14 +226,25 @@ function _renderLens2to5(ayahNum, lensNum, container) {
 
 // Lens 2 — World of the Quran
 function _renderLens2(l2, container) {
-  if (l2.context)   container.appendChild(_lensBlock('Historical Context', l2.context));
-  if (l2.asbab)     container.appendChild(_lensBlock('Asbab al-Nuzul', l2.asbab));
+  const isUrdu = (typeof currentLang !== 'undefined' && currentLang === 'ur');
+  if (l2.context) {
+    const txt = (isUrdu && l2.context_ur) ? l2.context_ur : l2.context;
+    container.appendChild(_lensBlock('Historical Context', txt, isUrdu && !!l2.context_ur));
+  }
+  if (l2.asbab) {
+    const txt = (isUrdu && l2.asbab_ur) ? l2.asbab_ur : l2.asbab;
+    container.appendChild(_lensBlock('Asbab al-Nuzul', txt, isUrdu && !!l2.asbab_ur));
+  }
   if (l2.reference) container.appendChild(_lensBlock('Reference', l2.reference));
 }
 
 // Lens 3 — My Experience
 function _renderLens3(l3, container) {
   if (!l3.questions || !l3.questions.length) return;
+
+  const lang = (typeof currentLang !== 'undefined' ? currentLang : 'en');
+  const isUrdu = (lang === 'ur');
+  const questions = (isUrdu && l3.questions_ur) ? l3.questions_ur : l3.questions;
 
   const block = document.createElement('div');
   block.className = 'lens-block';
@@ -216,10 +256,13 @@ function _renderLens3(l3, container) {
 
   const list = document.createElement('ul');
   list.className = 'lens-questions';
-  l3.questions.forEach(q => {
+  questions.forEach(q => {
     const li = document.createElement('li');
     li.className = 'lens-question-item';
     li.textContent = q;
+    if (isUrdu) {
+      li.style.cssText = "direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu',serif;line-height:2.4";
+    }
     list.appendChild(li);
   });
 
@@ -229,6 +272,17 @@ function _renderLens3(l3, container) {
 
 // Lens 4 — Connections
 function _renderLens4(l4, container) {
+  const lang    = (typeof currentLang !== 'undefined' ? currentLang : 'en');
+  const isUrdu  = (lang === 'ur');
+
+  function _applyUrduStyles(el) {
+    el.style.direction  = 'rtl';
+    el.style.textAlign  = 'right';
+    el.style.fontFamily = "'Noto Nastaliq Urdu', serif";
+    el.style.lineHeight = '2.4';
+    el.style.fontSize   = 'calc(var(--sz-tafsir) * 0.95)';
+  }
+
   if (l4.ayat && l4.ayat.length) {
     const block = document.createElement('div');
     block.className = 'lens-block';
@@ -246,9 +300,11 @@ function _renderLens4(l4, container) {
       ref.className = 'lens-connection-ref';
       ref.textContent = a.ref;
 
+      const useUrText = isUrdu && a.text_ur;
       const text = document.createElement('p');
       text.className = 'lens-block-text';
-      text.textContent = a.text;
+      text.textContent = useUrText ? a.text_ur : a.text;
+      if (useUrText) _applyUrduStyles(text);
 
       item.appendChild(ref);
       item.appendChild(text);
@@ -267,9 +323,11 @@ function _renderLens4(l4, container) {
     label.textContent = 'Hadith';
     block.appendChild(label);
 
+    const useUrHadith = isUrdu && l4.hadith_ur;
     const h = document.createElement('p');
     h.className = 'lens-hadith';
-    h.textContent = l4.hadith;
+    h.textContent = useUrHadith ? l4.hadith_ur : l4.hadith;
+    if (useUrHadith) _applyUrduStyles(h);
     block.appendChild(h);
 
     container.appendChild(block);
@@ -291,8 +349,14 @@ function _renderLens5(l5, container) {
 
   const seed = document.createElement('p');
   seed.className = 'lens-block-text';
-  seed.style.cssText = 'font-style:italic;color:var(--text-primary)';
-  seed.textContent = l5.seed;
+  const lang = (typeof currentLang !== 'undefined' ? currentLang : 'en');
+  if (lang === 'ur' && l5.seed_ur) {
+    seed.textContent = l5.seed_ur;
+    seed.style.cssText = "direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu',serif;font-size:1.1em;line-height:2.4;color:var(--text-primary)";
+  } else {
+    seed.style.cssText = 'font-style:italic;color:var(--text-primary)';
+    seed.textContent = l5.seed;
+  }
   block.appendChild(seed);
   container.appendChild(block);
 
@@ -303,7 +367,7 @@ function _renderLens5(l5, container) {
 }
 
 // Generic labelled block
-function _lensBlock(labelText, bodyText) {
+function _lensBlock(labelText, bodyText, rtl) {
   const block = document.createElement('div');
   block.className = 'lens-block';
 
@@ -314,6 +378,9 @@ function _lensBlock(labelText, bodyText) {
   const body = document.createElement('p');
   body.className = 'lens-block-text';
   body.textContent = bodyText;
+  if (rtl) {
+    body.style.cssText = "direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu',serif;font-size:1.05em;line-height:2.4";
+  }
 
   block.appendChild(label);
   block.appendChild(body);

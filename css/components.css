@@ -471,6 +471,20 @@ a:hover { color: var(--gold-light); }
   justify-content: center;
   padding: 40px 20px;
   background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 18px,
+      var(--hatch-line) 18px,
+      var(--hatch-line) 19px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 18px,
+      var(--hatch-line) 18px,
+      var(--hatch-line) 19px
+    ),
     radial-gradient(ellipse at 20% 50%, rgba(240,192,96,0.04) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 20%, rgba(58,125,123,0.04) 0%, transparent 50%),
     var(--bg-base);
@@ -516,12 +530,13 @@ a:hover { color: var(--gold-light); }
 
 .auth-card {
   background: var(--bg-surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
   padding: 28px 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  box-shadow: var(--shadow-glow), var(--shadow-card);
 }
 
 .auth-tabs {
@@ -1033,6 +1048,26 @@ a:hover { color: var(--gold-light); }
   margin-bottom: 28px;
   letter-spacing: 0.01em;
 }
+
+/* ── Bismillah ornament — shown above Ayah 1 only ─────────── */
+.study-bismillah {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: calc(var(--sz-arabic) * 0.62);
+  line-height: 1.8;
+  direction: rtl;
+  text-align: center;
+  color: var(--gold);
+  opacity: 0.85;
+  margin-bottom: 8px;
+  letter-spacing: 0;
+  animation: bismillah-fade-in 0.6s ease both;
+}
+
+@keyframes bismillah-fade-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 0.85; transform: translateY(0); }
+}
+
 
 .study-transliteration {
   font-family: 'Crimson Pro', serif;
