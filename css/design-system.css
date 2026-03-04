@@ -60,6 +60,9 @@
   --nav-h:        60px;
   --bottom-nav-h: 64px;
 
+  /* Reading column width — single source of truth */
+  --reading-max: 680px;
+
   /* Text size scale — medium (default) */
   --sz-arabic:      42px;
   --sz-translation: 22px;

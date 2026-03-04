@@ -1,12 +1,12 @@
 {
-  "name": "Miftah \u2014 Surah Al-Mulk",
+  "name": "Miftah — Surah Al-Mulk",
   "short_name": "Miftah",
-  "description": "Your key to deeper Quranic study \u2014 a 5-lens tadabbur companion for Surah Al-Mulk",
+  "description": "Your key to deeper Quranic study — a 5-lens tadabbur companion for Surah Al-Mulk",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#F5F0E8",
-  "theme_color": "#C9A84C",
+  "background_color": "#0D0F14",
+  "theme_color": "#F0C060",
   "lang": "en",
   "icons": [
     {

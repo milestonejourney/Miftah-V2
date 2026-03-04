@@ -6,6 +6,12 @@
   <meta name="description" content="Miftah — A structured deep-study companion for Surah Al-Mulk">
   <title>Miftah · Surah Al-Mulk</title>
 
+  <!-- Favicons & PWA icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
   <!-- CSS -->
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/components.css">
@@ -69,7 +75,7 @@
 
     <!-- Left: Brand -->
     <div class="nav-brand">
-      <span class="nav-brand-arabic">مفتاح</span>
+      <img src="icons/logo-dark.png" alt="Miftah" class="nav-logo-img theme-logo" id="logo-nav">
       <span class="nav-brand-latin">Miftah</span>
     </div>
 
@@ -96,7 +102,12 @@
       <button class="nav-icon-btn"
               onclick="toggleSettings()"
               aria-label="Settings"
-              title="Settings">⚙</button>
+              title="Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
     </div>
 
   </nav>
@@ -109,27 +120,48 @@
   <nav id="bottomNav" style="display:none" role="navigation" aria-label="Section navigation">
 
     <button class="bottom-nav-btn" data-page="overview" onclick="showPage('overview')" aria-label="Overview">
-      <span class="bnb-icon">◈</span>
+      <svg class="bnb-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
       <span class="bnb-label" data-i18n="nav_overview">Overview</span>
     </button>
 
     <button class="bottom-nav-btn" data-page="study" onclick="showPage('study')" aria-label="Study">
-      <span class="bnb-icon">✦</span>
+      <svg class="bnb-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
       <span class="bnb-label" data-i18n="nav_study">Study</span>
     </button>
 
     <button class="bottom-nav-btn" data-page="vocab" onclick="showPage('vocab')" aria-label="Vocabulary">
-      <span class="bnb-icon">⟡</span>
+      <svg class="bnb-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
       <span class="bnb-label" data-i18n="nav_vocab">Vocab</span>
     </button>
 
     <button class="bottom-nav-btn" data-page="action" onclick="showPage('action')" aria-label="Action plan">
-      <span class="bnb-icon">◎</span>
+      <svg class="bnb-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="8" y1="6" x2="21" y2="6"/>
+        <line x1="8" y1="12" x2="21" y2="12"/>
+        <line x1="8" y1="18" x2="21" y2="18"/>
+        <line x1="3" y1="6" x2="3.01" y2="6"/>
+        <line x1="3" y1="12" x2="3.01" y2="12"/>
+        <line x1="3" y1="18" x2="3.01" y2="18"/>
+      </svg>
       <span class="bnb-label" data-i18n="nav_actions">Actions</span>
     </button>
 
     <button class="bottom-nav-btn" data-page="journal" onclick="showPage('journal')" aria-label="Journal">
-      <span class="bnb-icon">≋</span>
+      <svg class="bnb-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+        <polyline points="10 9 9 9 8 9"/>
+      </svg>
       <span class="bnb-label" data-i18n="nav_journal">Journal</span>
     </button>
 
@@ -209,7 +241,7 @@
 
       <!-- Brand -->
       <div class="auth-brand">
-        <div class="auth-brand-arabic">مفتاح</div>
+        <img src="icons/logo-dark.png" alt="Miftah" class="auth-logo-img theme-logo" id="logo-auth">
         <div class="auth-brand-latin">Miftah</div>
         <div class="auth-tagline" data-i18n="tagline">Your key to deeper Quranic study</div>
       </div>
@@ -425,13 +457,19 @@
   <main id="page-overview" class="page" role="main">
 
     <div class="overview-header">
-      <h1 class="overview-surah-name" data-i18n="overview_surah">Surah Al-Mulk</h1>
-      <div class="overview-meta">
-        <span class="overview-meta-item" data-i18n="overview_makkan">Makkan</span>
-        <span class="overview-meta-dot"></span>
-        <span class="overview-meta-item">30 Ayahs</span>
-        <span class="overview-meta-dot"></span>
-        <span class="overview-meta-item" data-i18n="overview_subtitle">The Sovereignty</span>
+      <div class="overview-header-top">
+        <div class="overview-header-text">
+          <h1 class="overview-surah-name" data-i18n="overview_surah">Surah Al-Mulk</h1>
+          <p class="overview-surah-arabic">سُورَةُ الْمُلْكِ</p>
+          <div class="overview-meta">
+            <span class="overview-meta-item" data-i18n="overview_makkan">Makkan</span>
+            <span class="overview-meta-dot"></span>
+            <span class="overview-meta-item">30 Ayahs</span>
+            <span class="overview-meta-dot"></span>
+            <span class="overview-meta-item" data-i18n="overview_subtitle">The Sovereignty</span>
+          </div>
+        </div>
+        <img src="icons/logo-dark.png" alt="" class="overview-logo theme-logo" id="logo-overview" aria-hidden="true">
       </div>
       <div class="overview-progress-bar">
         <div class="overview-progress-fill" id="overview-progress-fill" style="width:0%"></div>
@@ -469,14 +507,31 @@
 
       <!-- Controls: audio + memorize -->
       <div class="study-controls">
+
+        <!-- Recite — animated audio waveform -->
         <button class="study-ctrl-btn" id="audio-btn" onclick="playAudio()">
-          <span>▶</span>
+          <span class="btn-icon waveform" aria-hidden="true">
+            <span class="wv-bar"></span>
+            <span class="wv-bar"></span>
+            <span class="wv-bar"></span>
+            <span class="wv-bar"></span>
+            <span class="wv-bar"></span>
+          </span>
           <span data-i18n="recite">Recite</span>
         </button>
+
+        <!-- Study Mode — animated quill -->
         <button class="study-ctrl-btn" id="memorize-btn" onclick="toggleMemorize()">
-          <span>👁</span>
+          <span class="btn-icon quill" aria-hidden="true">
+            <svg class="quill-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+              <line x1="16" y1="8" x2="2" y2="22"/>
+              <line x1="17.5" y1="15" x2="9" y2="15"/>
+            </svg>
+          </span>
           <span data-i18n="study_mode">Study Mode</span>
         </button>
+
       </div>
     </div>
 

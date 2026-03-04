@@ -15,6 +15,10 @@ function setTheme(theme) {
   document.querySelectorAll('[data-theme-btn]').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-theme-btn') === theme);
   });
+
+  // Swap logo: dark theme uses gold-on-dark, light/sepia use gold-on-sepia
+  const logoSrc = (theme === 'dark') ? 'icons/logo-dark.png' : 'icons/logo-light.png';
+  document.querySelectorAll('.theme-logo').forEach(img => { img.src = logoSrc; });
 }
 
 // Sets text size and persists. Called by settings buttons + initTheme().

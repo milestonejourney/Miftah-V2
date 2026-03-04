@@ -76,7 +76,11 @@ function handleUserLoggedIn(user) {
 
   const email = user.email || '';
   const navEl = document.getElementById('nav-user-email');
-  if (navEl) navEl.textContent = email;
+  if (navEl) {
+    const handle = email.split('@')[0];
+    const friendly = handle.charAt(0).toUpperCase() + handle.slice(1);
+    navEl.textContent = friendly;
+  }
   setSettingsEmail(email);
 
   initFirebaseSync(user).then(() => {
