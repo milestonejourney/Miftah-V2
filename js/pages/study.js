@@ -27,6 +27,13 @@ function renderStudyPage(num) {
   App.state.currentAyah = num;
   App.state.currentLens = App.state.currentLens || 1;
 
+  // Stop any playing audio when navigating to a new ayah or surah
+  if (window._miftahAudio && !window._miftahAudio.paused) {
+    window._miftahAudio.pause();
+    const btn = document.getElementById('audio-btn');
+    if (btn) btn.classList.remove('active');
+  }
+
   const ayah = DataService.getAyah(num);
 
   _renderAyahDisplay(ayah);
@@ -506,9 +513,9 @@ function _revealWord(span) {
 // ── Audio ─────────────────────────────────────────────────
 
 function playAudio() {
-  const ayah    = App.state.currentAyah;
-  const surah   = '067';
-  const ayahPad = String(ayah).padStart(3, '0');
+  const ayah     = App.state.currentAyah;
+  const surah    = String(App.state.currentSurah).padStart(3, '0');
+  const ayahPad  = String(ayah).padStart(3, '0');
   const url = 'https://everyayah.com/data/Alafasy_128kbps/' + surah + ayahPad + '.mp3';
   const btn = document.getElementById('audio-btn');
 
