@@ -69,6 +69,19 @@ function goToAyah(num) {
   showPage('study');
 }
 
+function switchSurah(num) {
+  if (App.state.currentSurah === num) return;
+  App.state.currentSurah = num;
+  App.state.currentAyah  = loadLastAyah(num);
+  // Refresh surah-specific strings in the DOM
+  if (typeof renderSurahStrings === 'function') renderSurahStrings();
+  // Update switcher active state
+  document.querySelectorAll('[data-surah-btn]').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.getAttribute('data-surah-btn')) === num);
+  });
+  showPage('overview');
+}
+
 function prevAyah() {
   const prev = App.state.currentAyah - 1;
   if (prev >= 1) goToAyah(prev);

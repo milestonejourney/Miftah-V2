@@ -858,6 +858,55 @@ a:hover { color: var(--gold-light); }
 /* ── OVERVIEW PAGE ────────────────────────────────────────── */
 #page-overview {}
 
+/* ── Surah switcher ───────────────────────────────────────── */
+.surah-switcher {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.surah-switcher-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: system-ui, sans-serif;
+}
+
+.surah-switcher-btn:hover:not(.active) {
+  border-color: var(--gold);
+  color: var(--text-secondary);
+}
+
+.surah-switcher-btn.active {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+  color: var(--gold);
+}
+
+.surah-switcher-num {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.surah-switcher-name {
+  font-size: 13px;
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.surah-switcher-btn.active .surah-switcher-num { opacity: 1; }
+
 .overview-header {
   padding: 36px 24px 24px;
   max-width: var(--reading-max);

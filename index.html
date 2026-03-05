@@ -29,6 +29,11 @@
     GROUP 1: Data constants — no dependencies, declare globals only
     Each file declares exactly one const and nothing else.
   -->
+  <script src="js/data/surah-1.js" defer></script>
+  <script src="js/data/tafsir-1.js" defer></script>
+  <script src="js/data/morphology-1.js" defer></script>
+  <script src="js/data/lens-1.js" defer></script>
+
   <script src="js/data/surah-67.js" defer></script>
   <script src="js/data/tafsir-67.js" defer></script>
   <script src="js/data/morphology-67.js" defer></script>
@@ -457,6 +462,20 @@
   <main id="page-overview" class="page" role="main">
 
     <div class="overview-header">
+      <!-- Surah switcher — grows as new surahs are added -->
+      <div class="surah-switcher" role="tablist" aria-label="Select Surah">
+        <button class="surah-switcher-btn" data-surah-btn="1"
+                onclick="switchSurah(1)" role="tab" aria-label="Surah Al-Fatiha">
+          <span class="surah-switcher-num">1</span>
+          <span class="surah-switcher-name">Al-Fatiha</span>
+        </button>
+        <button class="surah-switcher-btn active" data-surah-btn="67"
+                onclick="switchSurah(67)" role="tab" aria-label="Surah Al-Mulk">
+          <span class="surah-switcher-num">67</span>
+          <span class="surah-switcher-name">Al-Mulk</span>
+        </button>
+      </div>
+
       <div class="overview-header-top">
         <div class="overview-header-text">
           <h1 class="overview-surah-name" id="surah-name-display">Surah Al-Mulk</h1>

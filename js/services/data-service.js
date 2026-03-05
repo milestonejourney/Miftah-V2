@@ -74,12 +74,63 @@ const SURAH_REGISTRY = {
   // ── Add future surahs here ─────────────────────────────
   // 18: { data: { surah: null, ... }, meta: { ... }, strings: { ... } },
 
+  1: {
+    data: {
+      surah:      null,
+      tafsir:     null,
+      morphology: null,
+      lens:       null,
+    },
+    meta: {
+      number:       1,
+      ayahCount:    7,
+      hasBismillah: false,  // Al-Fatiha's Bismillah is Ayah 1 itself, not a prefix
+      revelation:   'Makkan',
+    },
+    strings: {
+      name:       ['Surah Al-Fatiha',   'سورۃ الفاتحہ',  'सूरह अल-फ़ातिहा'],
+      nameArabic: 'سُورَةُ الْفَاتِحَةِ',
+      subtitle:   ['The Opening',       'افتتاح',         'खुलासा'],
+      revelation: ['Makkan',            'مکی',            'मक्की'],
+      intro: [
+        'Known as Umm al-Kitab — the Mother of the Book. Recited in every unit of every prayer. The Prophet ﷺ said: "There is no prayer for one who does not recite it." Begin your study by selecting any ayah below.',
+        'اسے امّ الکتاب کہا جاتا ہے — کتاب کی ماں۔ ہر نماز کی ہر رکعت میں پڑھی جاتی ہے۔ نبی ﷺ نے فرمایا: "جو اسے نہ پڑھے اس کی نماز نہیں۔" نیچے کوئی آیت چن کر مطالعہ شروع کریں۔',
+        'इसे उम्म अल-किताब कहा जाता है — किताब की माँ। हर नमाज़ की हर रक्अत में पढ़ी जाती है। नबी ﷺ ने फ़रमाया: "जो इसे न पढ़े उसकी नमाज़ नहीं।" नीचे कोई आयत चुन कर मुताला शुरू करें।'
+      ],
+      heartFilterTitle: [
+        'Heart Filter · Surah Al-Fatiha',
+        'دل کی نیت · سورۃ الفاتحہ',
+        'दिल की नीयत · सूरह अल-फ़ातिहा'
+      ],
+      heartFilterBody: [
+        'You are about to open Surah Al-Fatiha — the prayer you have recited thousands of times. Before the first ayah, pause. What do you hope to discover in words so familiar?',
+        'آپ سورۃ الفاتحہ کھولنے والے ہیں — وہ دعا جو آپ نے ہزاروں بار پڑھی ہے۔ پہلی آیت سے پہلے رکیں۔ اتنے مانوس الفاظ میں آپ کیا نیا دریافت کرنا چاہتے ہیں؟',
+        'आप सूरह अल-फ़ातिहा खोलने वाले हैं — वह दुआ जो आपने हज़ारों बार पढ़ी है। पहली आयत से पहले रुकें। इतने जाने-पहचाने अल्फ़ाज़ में आप क्या नया दरयाफ़्त करना चाहते हैं?'
+      ],
+      journeyBegins: [
+        'Your journey through Surah Al-Fatiha begins.',
+        'سورۃ الفاتحہ کا آپ کا سفر شروع ہو رہا ہے۔',
+        'सूरह अल-फ़ातिहा का आपका सफ़र शुरू हो रहा है।'
+      ],
+      vocabSubtitle: [
+        'Words saved from your study of Surah Al-Fatiha',
+        'سورۃ الفاتحہ کے مطالعے سے محفوظ کیے گئے الفاظ',
+        'सूरह अल-फ़ातिहा के मुताले से महफ़ूज़ किए गए अल्फ़ाज़'
+      ],
+    },
+  },
+
 };
 
 // Populates data references from globals after scripts have loaded.
 // Called once by DataService.init() on DOMContentLoaded.
 function _initRegistry() {
   /* eslint-disable no-undef */
+  if (typeof SURAH_1      !== 'undefined') SURAH_REGISTRY[1].data.surah      = SURAH_1;
+  if (typeof TAFSIR_1     !== 'undefined') SURAH_REGISTRY[1].data.tafsir     = TAFSIR_1;
+  if (typeof MORPHOLOGY_1 !== 'undefined') SURAH_REGISTRY[1].data.morphology = MORPHOLOGY_1;
+  if (typeof LENS_1       !== 'undefined') SURAH_REGISTRY[1].data.lens       = LENS_1;
+
   if (typeof SURAH_67      !== 'undefined') SURAH_REGISTRY[67].data.surah      = SURAH_67;
   if (typeof TAFSIR_67     !== 'undefined') SURAH_REGISTRY[67].data.tafsir     = TAFSIR_67;
   if (typeof MORPHOLOGY_67 !== 'undefined') SURAH_REGISTRY[67].data.morphology = MORPHOLOGY_67;
