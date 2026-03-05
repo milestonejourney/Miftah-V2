@@ -73,6 +73,8 @@ function switchSurah(num) {
   if (App.state.currentSurah === num) return;
   App.state.currentSurah = num;
   App.state.currentAyah  = loadLastAyah(num);
+  // Re-sync Firebase data and listeners for the new surah
+  if (typeof onSurahSwitch === 'function') onSurahSwitch(App.state.user);
   // Refresh surah-specific strings in the DOM
   if (typeof renderSurahStrings === 'function') renderSurahStrings();
   // Update switcher active state
