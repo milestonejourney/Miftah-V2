@@ -4,7 +4,7 @@
 // Version bump CACHE_NAME to force update on deploy.
 // ============================================================
 
-const CACHE_NAME = 'miftah-v9';
+const CACHE_NAME = 'miftah-v16';
 
 const STATIC_ASSETS = [
   '/',

@@ -20,6 +20,7 @@
 const App = {
   state: {
     currentPage:  'login',
+    currentSurah: 67,
     currentAyah:  1,
     currentLens:  1,
     user:         null,
@@ -66,6 +67,16 @@ function goToAyah(num) {
   App.state.currentAyah = num;
   saveLastAyah(num);
   showPage('study');
+}
+
+function prevAyah() {
+  const prev = App.state.currentAyah - 1;
+  if (prev >= 1) goToAyah(prev);
+}
+
+function nextAyah() {
+  const next = App.state.currentAyah + 1;
+  if (next <= DataService.getAyahCount()) goToAyah(next);
 }
 
 // ── Auth handlers ─────────────────────────────────────────
@@ -192,6 +203,12 @@ document.addEventListener('click', e => {
 // ── Init ──────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  // 0. Wire data globals into the registry — must be first
+  DataService.init();
+
+  // 0b. Migrate legacy storage key (miftah_v1_s67 → miftah_v1) — runs once, no-ops after
+  migrateFromLegacyStore();
 
   // 1. Apply persisted preferences immediately — no flash
   initTheme();

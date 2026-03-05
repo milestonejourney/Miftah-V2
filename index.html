@@ -423,7 +423,7 @@
       <div class="ob-step-content" id="ob-step-3">
         <div class="ob-header">
           <h2 class="ob-title" data-i18n="ob_ready">Ready</h2>
-          <p class="ob-subtitle" data-i18n="ob_journey_begins">Your journey through Surah Al Mulk begins.</p>
+          <p class="ob-subtitle" id="surah-journey-begins">Your journey through Surah Al-Mulk begins.</p>
         </div>
         <p class="ob-desc" data-i18n="ob_pace">
           30 ayahs. 5 lenses each. Your notes saved as you go. Work at your pace. Return anytime.
@@ -459,14 +459,14 @@
     <div class="overview-header">
       <div class="overview-header-top">
         <div class="overview-header-text">
-          <h1 class="overview-surah-name" data-i18n="overview_surah">Surah Al-Mulk</h1>
-          <p class="overview-surah-arabic">سُورَةُ الْمُلْكِ</p>
+          <h1 class="overview-surah-name" id="surah-name-display">Surah Al-Mulk</h1>
+          <p class="overview-surah-arabic" id="surah-name-arabic">سُورَةُ الْمُلْكِ</p>
           <div class="overview-meta">
-            <span class="overview-meta-item" data-i18n="overview_makkan">Makkan</span>
+            <span class="overview-meta-item" id="surah-revelation-display">Makkan</span>
             <span class="overview-meta-dot"></span>
-            <span class="overview-meta-item">30 Ayahs</span>
+            <span class="overview-meta-item" id="surah-ayah-count-display">30 Ayahs</span>
             <span class="overview-meta-dot"></span>
-            <span class="overview-meta-item" data-i18n="overview_subtitle">The Sovereignty</span>
+            <span class="overview-meta-item" id="surah-subtitle-display">The Sovereignty</span>
           </div>
         </div>
         <img src="icons/logo-dark.png" alt="" class="overview-logo theme-logo" id="logo-overview" aria-hidden="true">
@@ -477,7 +477,7 @@
       <p class="overview-progress-label" id="overview-progress-label">0 of 30 complete</p>
     </div>
 
-    <p class="overview-intro" data-i18n="overview_intro">
+    <p class="overview-intro" id="surah-intro-display">
       Known as Al-Munjiyah (The Rescuer), this surah protects its reader from the punishment of the grave. The Prophet ﷺ would not sleep until he recited it. Begin your study journey by selecting any ayah below.
     </p>
 
@@ -496,11 +496,23 @@
 
     <!-- Ayah display -->
     <div class="study-ayah">
-      <p class="study-ayah-counter">
-        <span id="ayah-num-display">1</span>
-        <span data-i18n="ayah_of"> of </span>
-        <span>30</span>
-      </p>
+      <div class="study-ayah-nav">
+        <button class="ayah-nav-btn" id="prev-ayah-btn" onclick="prevAyah()" aria-label="Previous ayah">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <p class="study-ayah-counter">
+          <span id="ayah-num-display">1</span>
+          <span data-i18n="ayah_of"> of </span>
+          <span id="ayah-total-display">30</span>
+        </p>
+        <button class="ayah-nav-btn" id="next-ayah-btn" onclick="nextAyah()" aria-label="Next ayah">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
       <p class="study-arabic" id="study-arabic" dir="rtl" lang="ar"></p>
       <p class="study-transliteration" id="study-transliteration"></p>
       <p class="study-translation translation" id="study-translation"></p>
@@ -625,7 +637,7 @@
 
     <div class="vocab-header">
       <h1 class="vocab-title" data-i18n="vocab_title">Vocabulary Bank</h1>
-      <p class="vocab-subtitle" data-i18n="vocab_subtitle">Words saved from your study of Surah Al Mulk</p>
+      <p class="vocab-subtitle" id="surah-vocab-subtitle">Words saved from your study of Surah Al-Mulk</p>
       <p class="vocab-count" id="vocab-count"></p>
     </div>
 
@@ -699,9 +711,9 @@
        ════════════════════════════════════════════════════════ -->
   <div class="modal-overlay" id="heart-modal" role="dialog" aria-modal="true" aria-labelledby="heart-modal-title">
     <div class="modal-box">
-      <p class="modal-subtitle" data-i18n="heart_filter_title">Heart Filter · Surah Al-Mulk</p>
+      <p class="modal-subtitle" id="surah-heart-filter-title">Heart Filter · Surah Al-Mulk</p>
       <h2 class="modal-title" id="heart-modal-title" data-i18n="heart_filter_before">Before you begin</h2>
-      <p class="modal-body" data-i18n="heart_filter_body">
+      <p class="modal-body" id="surah-heart-filter-body">
         You are about to open Surah Al-Mulk for deep study. Before the first ayah, pause for a moment. What do you bring with you? What do you hope to find?
       </p>
       <p class="modal-body" style="font-size:14px; color: var(--text-tertiary)" data-i18n="heart_filter_journal">

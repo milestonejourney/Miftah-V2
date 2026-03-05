@@ -23,7 +23,7 @@ let _activeWord = null;
 // ── Entry point ───────────────────────────────────────────
 
 function renderStudyPage(num) {
-  if (!num || num < 1 || num > 30) num = 1;
+  if (!num || num < 1 || num > DataService.getAyahCount()) num = 1;
   App.state.currentAyah = num;
   App.state.currentLens = App.state.currentLens || 1;
 
@@ -43,16 +43,24 @@ function renderStudyPage(num) {
 
 function _renderAyahDisplay(ayah) {
   const numEl      = document.getElementById('ayah-num-display');
+  const totalEl    = document.getElementById('ayah-total-display');
   const arabicEl   = document.getElementById('study-arabic');
   const translitEl = document.getElementById('study-transliteration');
   const transEl    = document.getElementById('study-translation');
   const navDisplay = document.getElementById('ayah-current-display');
+  const prevBtn    = document.getElementById('prev-ayah-btn');
+  const nextBtn    = document.getElementById('next-ayah-btn');
+
+  const total = DataService.getAyahCount();
 
   if (numEl)      numEl.textContent      = ayah.num;
+  if (totalEl)    totalEl.textContent    = total;
   if (translitEl) translitEl.textContent = ayah.transliteration || '';
   if (transEl)    transEl.textContent    = getAyahTranslation(ayah);
   if (navDisplay) navDisplay.textContent = 'Ayah ' + ayah.num;
 
+  if (prevBtn)    prevBtn.disabled = ayah.num <= 1;
+  if (nextBtn)    nextBtn.disabled = ayah.num >= total;
   // Build word spans for memorize mode word-by-word reveal
   if (arabicEl) {
     // Remove any existing bismillah first — always, before re-evaluating
@@ -60,9 +68,11 @@ function _renderAyahDisplay(ayah) {
     if (existing) existing.remove();
 
     // Bismillah ornament — shown above Ayah 1 for surahs that begin with it
-    if (ayah.num === 1 && DataService.getSurahMeta().hasBismillah) {
+    if (ayah.num === 1 && DataService.getSurahMeta().meta.hasBismillah) {
       const bism = document.createElement('div');
       bism.className = 'study-bismillah';
+      bism.setAttribute('lang', 'ar');
+      bism.setAttribute('dir', 'rtl');
       bism.textContent = '﷽';
       arabicEl.parentNode.insertBefore(bism, arabicEl);
     }

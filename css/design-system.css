@@ -6,7 +6,22 @@
    ============================================================ */
 
 /* ── Google Fonts ─────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;500;600&family=Noto+Nastaliq+Urdu:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500&display=swap');
+/* ── Google Fonts — Latin + Urdu + Hindi ───────────────────── */
+/* Arabic (Quranic) is self-hosted below — not on Google Fonts  */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Nastaliq+Urdu:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500&display=swap');
+
+/* ── KFGQPC Uthmanic Script HAFS — self-hosted ─────────────── */
+/* Font file: /fonts/KFGQPCUthmanicScriptHAFS.woff2             */
+/* Download: https://cdn.jsdelivr.net/npm/kfgqpc-uthmanic-script-hafs-regular@1.0.0/ */
+/* License: Free for use, King Fahd Glorious Quran Printing Complex */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('fonts/KFGQPCUthmanicScriptHAFS.woff2') format('woff2'),
+       url('fonts/KFGQPCUthmanicScriptHAFS.otf')   format('opentype');
+  font-weight: normal;
+  font-style:  normal;
+  font-display: block;  /* Wait for font — prevents dotted-circle artifacts on Uthmanic combining marks */
+}
 
 /* ── Dark mode (default) ──────────────────────────────────── */
 :root {
@@ -128,6 +143,20 @@
 [data-lang="ur"][data-text-size="lg"]    { --sz-arabic: 46px; }
 [data-lang="ur-hi"][data-text-size="sm"] { --sz-arabic: 28px; }
 [data-lang="ur-hi"][data-text-size="lg"] { --sz-arabic: 44px; }
+
+/* ── Arabic text shaping — applies to all KFGQPC elements ─── */
+/* Forces correct OpenType shaping for Uthmanic combining marks */
+/* (U+06DF, U+0653, U+0670 etc.) that would otherwise render   */
+/* as dotted circles on some browsers/platforms.               */
+[lang="ar"],
+.study-arabic,
+.study-bismillah,
+.morphology-arabic,
+.vocab-arabic {
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "calt" 1, "liga" 1, "rlig" 1, "mset" 1;
+  -webkit-font-smoothing: antialiased;
+}
 
 /* ── Translation font + direction per language ────────────── */
 /* JS NEVER sets fontFamily or direction on content elements.  */

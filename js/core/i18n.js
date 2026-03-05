@@ -32,9 +32,7 @@ const STRINGS = {
   tagline:              ['Your key to deeper Quranic study', 'قرآن کو گہرائی سے سمجھنے کی چابی', 'क़ुरआन को गहराई से समझने की चाबी'],
 
   // Heart filter
-  heart_filter_title:   ['Heart Filter · Surah Al-Mulk', 'دل کی نیت · سورۃ الملک', 'दिल की नीयत · सूरह अल-मुल्क'],
   heart_filter_before:  ['Before you begin',       'شروع کرنے سے پہلے',    'शुरू करने से पहले'],
-  heart_filter_body:    ['You are about to open Surah Al-Mulk for deep study. Before the first ayah, pause for a moment. What do you bring with you? What do you hope to find?', 'آپ سورۃ الملک کا گہرا مطالعہ شروع کرنے والے ہیں۔ پہلی آیت سے پہلے ایک لمحہ رکیں۔ آپ کیا لے کر آئے ہیں؟ کیا پانا چاہتے ہیں؟', 'आप सूरह अल-मुल्क का गहरा मुताला शुरू करने वाले हैं। पहली आयत से पहले एक लम्हा रुकें। आप क्या लेकर आए हैं? क्या पाना चाहते हैं?'],
   heart_filter_journal: ['This will be the opening entry in your Study Journal.', 'یہ آپ کے مطالعہ جرنل کی پہلی سطر ہوگی۔', 'यह आपके मुताला जर्नल की पहली सतर होगी।'],
   begin_session:        ['Begin Study Session',    'مطالعہ شروع کریں',     'मुताला शुरू करें'],
 
@@ -56,7 +54,6 @@ const STRINGS = {
   ob_back:              ['← Back',                 '← واپس',               '← वापस'],
   ob_next:              ['Let\'s begin →',          'آگے چلیں →',           'आगे चलें →'],
   ob_ready:             ['Ready',                  'تیار ہیں؟',             'तैयार हैं?'],
-  ob_journey_begins:    ['Your journey through Surah Al Mulk begins.', 'سورۃ الملک کا آپ کا سفر شروع ہو رہا ہے۔', 'सूरह अल-मुल्क का आपका सफ़र शुरू हो रहा है।'],
   ob_pace:              ['30 ayahs. 5 lenses each. Your notes saved as you go. Work at your pace. Return anytime. The Quran is patient.', '۳۰ آیات۔ ہر ایک کے ۵ عدسے۔ نوٹس محفوظ ہوتے جائیں گے۔ اپنی رفتار سے چلیں۔ کبھی بھی واپس آئیں۔ قرآن صبر والا ہے۔', '३० आयात। हर एक के ५ नज़रिए। नोट्स महफ़ूज़ होते जाएंगे। अपनी रफ़्तार से चलें। कभी भी वापस आएं। क़ुरआन सब्र वाला है।'],
   ob_open_surah:        ['Open the Surah ✦',       'سورۃ کھولیں ✦',        'सूरह खोलें ✦'],
 
@@ -72,12 +69,8 @@ const STRINGS = {
   lens4_desc:           ['Related ayat, surah themes, hadith and seerah connections.', 'متعلقہ آیات، سورہ کے موضوعات، حدیث اور سیرت کے رابطے۔', 'मुताल्लिक़ आयात, सूरह के मौज़ूआत, हदीस और सीरत के रिश्ते।'],
   lens5_desc:           ['The universal principle — the fact of life Allah is teaching you here.', 'کائناتی اصول — وہ حقیقتِ زندگی جو اللہ یہاں سکھا رہا ہے۔', 'कायनाती उसूल — वह हक़ीक़त-ए-ज़िंदगी जो अल्लाह यहाँ सिखा रहा है।'],
 
-  // Overview
-  overview_surah:       ['Surah Al-Mulk',          'سورۃ الملک',            'सूरह अल-मुल्क'],
-  overview_subtitle:    ['The Sovereignty',         'بادشاہی',               'बादशाही'],
-  overview_makkan:      ['Makkan',                 'مکی',                   'मक्की'],
+  // Overview — non-surah-specific
   overview_complete:    ['Complete',               'مکمل',                  'मुकम्मल'],
-  overview_intro:       ['Known as Al-Munjiyah (The Rescuer), this surah protects its reader from the punishment of the grave. The Prophet ﷺ would not sleep until he recited it. Begin your study journey by selecting any ayah below.', 'اسے المنجیہ (نجات دینے والی) بھی کہتے ہیں۔ یہ سورۃ قبر کے عذاب سے بچاتی ہے۔ نبی ﷺ اسے پڑھے بغیر نہیں سوتے تھے۔ نیچے کوئی بھی آیت چن کر مطالعہ شروع کریں۔', 'इसे अल-मुंजियह (नजात देने वाली) भी कहते हैं। यह सूरह क़ब्र के अज़ाब से बचाती है। नबी ﷺ इसे पढ़े बिना नहीं सोते थे। नीचे कोई भी आयत चुन कर मुताला शुरू करें।'],
 
   // Study page
   recite:               ['▶ Recite',               '▶ تلاوت',               '▶ तिलावत'],
@@ -105,7 +98,6 @@ const STRINGS = {
 
   // Vocab page
   vocab_title:          ['Vocabulary Bank',        'ذخیرۂ الفاظ',           'ज़ख़ीरा-ए-अल्फ़ाज़'],
-  vocab_subtitle:       ['Words saved from your study of Surah Al Mulk', 'سورۃ الملک کے مطالعے سے محفوظ کیے گئے الفاظ', 'सूरह अल-मुल्क के मुताले से महफ़ूज़ किए गए अल्फ़ाज़'],
   vocab_empty:          ['No words saved yet. Tap any word while studying to save it here.', 'ابھی کوئی لفظ محفوظ نہیں۔ مطالعے کے دوران کسی لفظ کو تھپتھپائیں۔', 'अभी कोई लफ़्ज़ महफ़ूज़ नहीं। मुताले के दौरान किसी लफ़्ज़ को टैप करें।'],
 
   // Action page
@@ -150,12 +142,41 @@ function updateI18n() {
   });
 }
 
+// Populates all surah-specific DOM elements from the registry.
+// Called on init and every time language changes.
+// Safe to call before DataService is ready — exits silently.
+function renderSurahStrings() {
+  if (typeof DataService === 'undefined') return;
+  const { strings } = DataService.getSurahMeta();
+  const idx = currentLang === 'ur' ? 1 : currentLang === 'hi' ? 2 : 0;
+
+  const set = (id, value) => {
+    const el = document.getElementById(id);
+    if (el && value !== undefined) el.textContent = value;
+  };
+
+  set('surah-name-display',      strings.name[idx]);
+  set('surah-name-arabic',       strings.nameArabic);
+  set('surah-subtitle-display',  strings.subtitle[idx]);
+  set('surah-revelation-display',strings.revelation[idx]);
+  set('surah-intro-display',     strings.intro[idx]);
+  set('surah-journey-begins',    strings.journeyBegins[idx]);
+  set('surah-vocab-subtitle',    strings.vocabSubtitle[idx]);
+  set('surah-heart-filter-title',strings.heartFilterTitle[idx]);
+  set('surah-heart-filter-body', strings.heartFilterBody[idx]);
+
+  // Ayah count never translates — always "N Ayahs"
+  const countEl = document.getElementById('surah-ayah-count-display');
+  if (countEl) countEl.textContent = DataService.getAyahCount() + ' Ayahs';
+}
+
 // Changes language, updates DOM, persists to store.
 // Called by settings.js buttons and on app init.
 function setLang(lang) {
   currentLang = lang;
   document.documentElement.setAttribute('data-lang', lang);
   updateI18n();
+  renderSurahStrings();
   saveLang(lang);
 
   // Update active state on settings lang buttons
@@ -179,6 +200,7 @@ function initI18n() {
   currentLang = saved;
   document.documentElement.setAttribute('data-lang', saved);
   updateI18n();
+  renderSurahStrings();
 
   // Mark the correct button active in settings panel
   document.querySelectorAll('[data-lang-btn]').forEach(btn => {

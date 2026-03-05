@@ -522,7 +522,7 @@ a:hover { color: var(--gold-light); }
 }
 
 .auth-brand-arabic {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: 52px;
   color: var(--gold);
   line-height: 1.2;
@@ -893,7 +893,7 @@ a:hover { color: var(--gold-light); }
 }
 
 .overview-surah-arabic {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: 22px;
   color: var(--text-secondary);
   direction: rtl;
@@ -1074,17 +1074,54 @@ a:hover { color: var(--gold-light); }
   text-align: center;
 }
 
+/* ── Prev / Next nav row ──────────────────────────────────── */
+.study-ayah-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.ayah-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.ayah-nav-btn:hover:not(:disabled) {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+
+.ayah-nav-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
 .study-ayah-counter {
   font-size: 12px;
   color: var(--text-tertiary);
   font-family: system-ui, sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  min-width: 80px;
+  text-align: center;
 }
 
 .study-arabic {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: var(--sz-arabic);
   line-height: 2.2;
   color: var(--text-arabic);
@@ -1096,7 +1133,7 @@ a:hover { color: var(--gold-light); }
 
 /* ── Bismillah ornament — shown above Ayah 1 only ─────────── */
 .study-bismillah {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: calc(var(--sz-arabic) * 0.62);
   line-height: 1.8;
   direction: rtl;
@@ -1160,7 +1197,7 @@ a:hover { color: var(--gold-light); }
 /* Subtle placeholder so chip doesn't collapse when arabic is hidden */
 .memorize-chip::before {
   content: '؟';
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: 18px;
   color: var(--text-tertiary);
   position: absolute;
@@ -1525,7 +1562,7 @@ a:hover { color: var(--gold-light); }
 }
 
 .word-chip-arabic {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: 22px;
   line-height: 1.5;
   color: var(--text-arabic);
@@ -1674,7 +1711,7 @@ a:hover { color: var(--gold-light); }
 }
 
 .word-popup-arabic {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: 44px;
   line-height: 1.5;
   color: var(--text-arabic);
@@ -1746,7 +1783,7 @@ a:hover { color: var(--gold-light); }
 }
 
 .word-popup-root-arabic {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: 20px;
   color: var(--lens-1);
   direction: rtl;
@@ -1823,7 +1860,7 @@ a:hover { color: var(--gold-light); }
 .vocab-card:hover { border-color: var(--border-strong); }
 
 .vocab-card-arabic {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: 28px;
   line-height: 1.4;
   color: var(--text-arabic);
@@ -1848,7 +1885,7 @@ a:hover { color: var(--gold-light); }
 }
 
 .vocab-card-root {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: 15px;
   color: var(--text-secondary);
   direction: rtl;
@@ -2042,7 +2079,7 @@ a:hover { color: var(--gold-light); }
 }
 
 .journal-ayah-arabic-preview {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: 18px;
   line-height: 1.5;
   color: var(--text-secondary);
@@ -2213,15 +2250,10 @@ em {
   .modal-box { padding: 36px 32px; }
 }
 
-/* ── Desktop — wider reading column + larger type ─────────── */
+/* ── Desktop — wider reading column ───────────────────────── */
 @media (min-width: 1024px) {
   :root {
-    --reading-max:    820px;
-    --sz-arabic:      52px;
-    --sz-translation: 26px;
-    --sz-translit:    18px;
-    --sz-tafsir:      19px;
-    --sz-body:        17px;
+    --reading-max: 820px;
   }
 
   .overview-surah-name  { font-size: 32px; }
@@ -2338,7 +2370,7 @@ em {
 
 .journal-entry-arabic {
   flex: 1;
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'Noto Naskh Arabic', serif;
   font-size: 15px;
   color: var(--text-primary);
   direction: rtl;
