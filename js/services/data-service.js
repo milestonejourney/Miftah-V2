@@ -74,6 +74,52 @@ const SURAH_REGISTRY = {
   // ── Add future surahs here ─────────────────────────────
   // 18: { data: { surah: null, ... }, meta: { ... }, strings: { ... } },
 
+  63: {
+    data: {
+      surah:      null,
+      tafsir:     null,
+      morphology: null,
+      lens:       null,
+    },
+    meta: {
+      number:       63,
+      ayahCount:    11,
+      hasBismillah: true,
+      revelation:   'Madinan',
+    },
+    strings: {
+      name:       ['Surah Al-Munafiqun',   'سورۃ المنافقون',  'सूरह अल-मुनाफ़िक़ून'],
+      nameArabic: 'سُورَةُ الْمُنَافِقُونَ',
+      subtitle:   ['The Hypocrites',       'منافقین',         'मुनाफ़िक़ीन'],
+      revelation: ['Madinan',              'مدنی',            'मदनी'],
+      intro: [
+        'A surgical dissection of hypocrisy — its language, its psychology, and its self-destructive end. Revealed after the expedition of Bani al-Mustaliq, it exposes a community that wore faith as a mask. Begin your study by selecting any ayah below.',
+        'نفاق کا جراحانہ تجزیہ — اس کی زبان، اس کی نفسیات، اور اس کا خود تباہ کن انجام۔ غزوۂ بنی المصطلق کے بعد نازل ہوئی، یہ ایک ایسی قوم کو بے نقاب کرتی ہے جو ایمان کو نقاب کے طور پر پہنتی تھی۔ نیچے کوئی آیت چن کر مطالعہ شروع کریں۔',
+        'निफ़ाक़ का शल्य-चिकित्सीय विश्लेषण — इसकी भाषा, इसकी मनोविज्ञान, और इसका आत्म-विनाशकारी अंत। बनी अल-मुस्तलिक़ अभियान के बाद नाज़िल हुई, यह एक ऐसी क़ौम को बेनक़ाब करती है जो ईमान को नक़ाब के रूप में पहनती थी। नीचे कोई आयत चुनकर मुताला शुरू करें।'
+      ],
+      heartFilterTitle: [
+        'Heart Filter · Surah Al-Munafiqun',
+        'دل کی نیت · سورۃ المنافقون',
+        'दिल की नीयत · सूरह अल-मुनाफ़िक़ून'
+      ],
+      heartFilterBody: [
+        'This surah is a mirror. Before you begin, pause — are you here to study the hypocrites, or to examine yourself? The most honest reading begins with that question.',
+        'یہ سورت ایک آئینہ ہے۔ شروع کرنے سے پہلے رکیں — کیا آپ منافقین کا مطالعہ کرنے آئے ہیں، یا اپنا جائزہ لینے؟ سب سے ایماندارانہ مطالعہ اسی سوال سے شروع ہوتا ہے۔',
+        'यह सूरह एक आईना है। शुरू करने से पहले रुकें — क्या आप मुनाफ़िक़ों का अध्ययन करने आए हैं, या ख़ुद का जायज़ा लेने? सबसे ईमानदार मुताला इसी सवाल से शुरू होता है।'
+      ],
+      journeyBegins: [
+        'Your journey through Surah Al-Munafiqun begins.',
+        'سورۃ المنافقون کا آپ کا سفر شروع ہو رہا ہے۔',
+        'सूरह अल-मुनाफ़िक़ून का आपका सफ़र शुरू हो रहा है।'
+      ],
+      vocabSubtitle: [
+        'Words saved from your study of Surah Al-Munafiqun',
+        'سورۃ المنافقون کے مطالعے سے محفوظ کیے گئے الفاظ',
+        'सूरह अल-मुनाफ़िक़ून के मुताले से महफ़ूज़ किए गए अल्फ़ाज़'
+      ],
+    },
+  },
+
   1: {
     data: {
       surah:      null,
@@ -130,6 +176,11 @@ function _initRegistry() {
   if (typeof TAFSIR_1     !== 'undefined') SURAH_REGISTRY[1].data.tafsir     = TAFSIR_1;
   if (typeof MORPHOLOGY_1 !== 'undefined') SURAH_REGISTRY[1].data.morphology = MORPHOLOGY_1;
   if (typeof LENS_1       !== 'undefined') SURAH_REGISTRY[1].data.lens       = LENS_1;
+
+  if (typeof SURAH_63      !== 'undefined') SURAH_REGISTRY[63].data.surah      = SURAH_63;
+  if (typeof TAFSIR_63     !== 'undefined') SURAH_REGISTRY[63].data.tafsir     = TAFSIR_63;
+  if (typeof MORPHOLOGY_63 !== 'undefined') SURAH_REGISTRY[63].data.morphology = MORPHOLOGY_63;
+  if (typeof LENS_63       !== 'undefined') SURAH_REGISTRY[63].data.lens       = LENS_63;
 
   if (typeof SURAH_67      !== 'undefined') SURAH_REGISTRY[67].data.surah      = SURAH_67;
   if (typeof TAFSIR_67     !== 'undefined') SURAH_REGISTRY[67].data.tafsir     = TAFSIR_67;

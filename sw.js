@@ -4,32 +4,42 @@
 // Version bump CACHE_NAME to force update on deploy.
 // ============================================================
 
-const CACHE_NAME = 'miftah-v26';
+const CACHE_NAME = 'miftah-v28';
+const BASE = '/Miftah-V2';
 
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/css/design-system.css',
-  '/css/components.css',
-  '/js/app.js',
-  '/js/core/i18n.js',
-  '/js/core/theme.js',
-  '/js/core/settings.js',
-  '/js/data/surah-67.js',
-  '/js/data/tafsir-67.js',
-  '/js/data/morphology-67.js',
-  '/js/data/lens-67.js',
-  '/js/services/store.js',
-  '/js/services/data-service.js',
-  '/js/services/firebase-client.js',
-  '/js/services/sync.js',
-  '/js/pages/auth.js',
-  '/js/pages/onboarding.js',
-  '/js/pages/overview.js',
-  '/js/pages/study.js',
-  '/js/pages/vocab.js',
-  '/js/pages/action.js',
-  '/js/pages/journal.js',
+  BASE + '/',
+  BASE + '/index.html',
+  BASE + '/css/design-system.css',
+  BASE + '/css/components.css',
+  BASE + '/js/app.js',
+  BASE + '/js/core/i18n.js',
+  BASE + '/js/core/theme.js',
+  BASE + '/js/core/settings.js',
+  BASE + '/js/data/surah-1.js',
+  BASE + '/js/data/tafsir-1.js',
+  BASE + '/js/data/morphology-1.js',
+  BASE + '/js/data/lens-1.js',
+  BASE + '/js/data/surah-63.js',
+  BASE + '/js/data/tafsir-63.js',
+  BASE + '/js/data/morphology-63.js',
+  BASE + '/js/data/lens-63.js',
+  BASE + '/js/data/surah-67.js',
+  BASE + '/js/data/tafsir-67.js',
+  BASE + '/js/data/morphology-67.js',
+  BASE + '/js/data/lens-67.js',
+  BASE + '/js/services/store.js',
+  BASE + '/js/services/data-service.js',
+  BASE + '/js/services/firebase-client.js',
+  BASE + '/js/services/sync.js',
+  BASE + '/js/pages/auth.js',
+  BASE + '/js/pages/onboarding.js',
+  BASE + '/js/pages/overview.js',
+  BASE + '/js/pages/study.js',
+  BASE + '/js/pages/vocab.js',
+  BASE + '/js/pages/action.js',
+  BASE + '/js/pages/journal.js',
+  BASE + '/fonts/KFGQPCUthmanicScriptHAFS.woff2',
   'https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Nastaliq+Urdu&display=swap'
 ];
 
@@ -90,7 +100,7 @@ self.addEventListener('fetch', event => {
       }).catch(() => {
         // Offline fallback for navigation requests
         if (event.request.mode === 'navigate') {
-          return caches.match('/index.html');
+          return caches.match(BASE + '/index.html');
         }
       });
     })
