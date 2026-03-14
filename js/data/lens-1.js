@@ -21,10 +21,11 @@ const LENS_1 = {
     },
     l4: {
       ayat: [
-        { ref: "27:30", text: "Indeed, it is from Solomon, and indeed it reads: In the name of Allah, the Entirely Merciful, the Especially Merciful." },
-        { ref: "16:98", text: "So when you recite the Qur'an, seek refuge in Allah from Satan, the expelled." }
+        { ref: "27:30", text: "Indeed, it is from Solomon, and indeed it reads: In the name of Allah, the Entirely Merciful, the Especially Merciful.", text_ur: "یقیناً یہ سلیمان کی طرف سے ہے، اور یہ پڑھا جاتا ہے: اللہ کے نام سے جو بڑا مہربان، نہایت رحم والا ہے۔" },
+        { ref: "16:98", text: "So when you recite the Qur'an, seek refuge in Allah from Satan, the expelled.", text_ur: "پس جب آپ قرآن پڑھیں تو شیطان مردود سے اللہ کی پناہ مانگیں۔" }
       ],
-      hadith: "The Prophet ﷺ said: 'Every matter of importance that does not begin with the remembrance of Allah is cut off from blessing.' (Ibn Majah, Abu Dawud — hasan)"
+      hadith: "The Prophet ﷺ said: 'Every matter of importance that does not begin with the remembrance of Allah is cut off from blessing.' (Ibn Majah, Abu Dawud — hasan)",
+      hadith_ur: "نبی ﷺ نے فرمایا: 'ہر اہم کام جو اللہ کے ذکر سے شروع نہ ہو وہ برکت سے کٹا ہوا ہے۔' (ابن ماجہ، ابو داود — حسن)"
     },
     l5: {
       seed: "Every meaningful beginning is an acknowledgment that what you are about to do is larger than yourself — to name the Divine before acting is itself an act of humility and orientation.",
@@ -53,10 +54,11 @@ const LENS_1 = {
     },
     l4: {
       ayat: [
-        { ref: "14:7", text: "And [remember] when your Lord proclaimed: If you are grateful, I will surely increase you [in favor]." },
-        { ref: "55:13", text: "So which of the favors of your Lord would you deny?" }
+        { ref: "14:7", text: "And [remember] when your Lord proclaimed: If you are grateful, I will surely increase you [in favor].", text_ur: "اور یاد کرو جب تمہارے رب نے اعلان کیا: اگر تم شکر ادا کرو گے تو میں تمہیں یقیناً اور زیادہ دوں گا۔" },
+        { ref: "55:13", text: "So which of the favors of your Lord would you deny?", text_ur: "پس تم اپنے رب کی کون کون سی نعمتوں کو جھٹلاؤ گے؟" }
       ],
-      hadith: "The Prophet ﷺ said: 'The best dhikr is La ilaha illa Allah, and the best supplication is Al-Hamdu Lillah.' (Tirmidhi — hasan gharib)"
+      hadith: "The Prophet ﷺ said: 'The best dhikr is La ilaha illa Allah, and the best supplication is Al-Hamdu Lillah.' (Tirmidhi — hasan gharib)",
+      hadith_ur: "نبی ﷺ نے فرمایا: 'سب سے بہترین ذکر لا الہ الا اللہ ہے، اور سب سے بہترین دعا الحمد للہ ہے۔' (ترمذی — حسن غریب)"
     },
     l5: {
       seed: "Gratitude is not a transaction — it is a recognition of reality. To say 'all praise belongs to Allah' is to see clearly who the true source of every good thing actually is.",
@@ -85,10 +87,11 @@ const LENS_1 = {
     },
     l4: {
       ayat: [
-        { ref: "6:12", text: "Say: To whom belongs whatever is in the heavens and earth? Say: To Allah. He has decreed upon Himself mercy." },
-        { ref: "39:53", text: "Say: O My servants who have transgressed against themselves, do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful." }
+        { ref: "6:12", text: "Say: To whom belongs whatever is in the heavens and earth? Say: To Allah. He has decreed upon Himself mercy.", text_ur: "کہو: آسمانوں اور زمین میں جو کچھ ہے وہ کس کا ہے؟ کہو: اللہ کا۔ اس نے اپنے اوپر رحمت لازم کر لی ہے۔" },
+        { ref: "39:53", text: "Say: O My servants who have transgressed against themselves, do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.", text_ur: "کہو: اے میرے بندو جنہوں نے اپنی جانوں پر زیادتی کی، اللہ کی رحمت سے مایوس نہ ہو۔ بے شک اللہ تمام گناہ معاف کر دیتا ہے۔ یقیناً وہی بخشنے والا، مہربان ہے۔" }
       ],
-      hadith: "The Prophet ﷺ said: 'Allah has one hundred parts of mercy. He sent down one part among jinn, humans, animals, and insects — by it they show compassion to one another. He has kept ninety-nine parts for the Day of Resurrection.' (Bukhari, Muslim)"
+      hadith: "The Prophet ﷺ said: 'Allah has one hundred parts of mercy. He sent down one part among jinn, humans, animals, and insects — by it they show compassion to one another. He has kept ninety-nine parts for the Day of Resurrection.' (Bukhari, Muslim)",
+      hadith_ur: "نبی ﷺ نے فرمایا: 'اللہ کی رحمت کے سو حصے ہیں۔ اس نے ایک حصہ جنوں، انسانوں، جانوروں اور کیڑوں میں اتارا — اسی سے وہ ایک دوسرے پر شفقت کرتے ہیں۔ اور نناوے حصے قیامت کے دن کے لیے محفوظ رکھے ہیں۔' (بخاری، مسلم)"
     },
     l5: {
       seed: "Power and mercy are not opposites — the most capable and sovereign being in existence chose to define Himself first by His compassion.",
@@ -117,10 +120,11 @@ const LENS_1 = {
     },
     l4: {
       ayat: [
-        { ref: "40:16", text: "The Day they come forth, nothing concerning them will be concealed from Allah. Whose is the dominion this Day? It is Allah's, the One, the Subjugator." },
-        { ref: "82:17-19", text: "And what can make you know what is the Day of Recompense? Again, what can make you know what is the Day of Recompense? It is the Day when a soul will not possess [power to do] a thing for another soul." }
+        { ref: "40:16", text: "The Day they come forth, nothing concerning them will be concealed from Allah. Whose is the dominion this Day? It is Allah's, the One, the Subjugator.", text_ur: "جس دن وہ نکل آئیں گے، ان کے بارے میں کوئی چیز اللہ سے پوشیدہ نہ ہوگی۔ آج کس کی بادشاہی ہے؟ اللہ کی، جو یکتا اور سب پر غالب ہے۔" },
+        { ref: "82:17-19", text: "And what can make you know what is the Day of Recompense? Again, what can make you know what is the Day of Recompense? It is the Day when a soul will not possess [power to do] a thing for another soul.", text_ur: "اور تمہیں کیا معلوم کہ یومِ جزاء کیا ہے؟ پھر تمہیں کیا معلوم کہ یومِ جزاء کیا ہے؟ وہ دن جب کوئی جان کسی دوسری جان کے لیے کچھ بھی اختیار نہ رکھے گی۔" }
       ],
-      hadith: "The Prophet ﷺ said: 'The wise person is he who reckons himself and works for what comes after death; and the helpless one is he who follows his desires and then has wishful thinking about Allah.' (Tirmidhi — hasan)"
+      hadith: "The Prophet ﷺ said: 'The wise person is he who reckons himself and works for what comes after death; and the helpless one is he who follows his desires and then has wishful thinking about Allah.' (Tirmidhi — hasan)",
+      hadith_ur: "نبی ﷺ نے فرمایا: 'عقلمند وہ ہے جو اپنا محاسبہ کرے اور موت کے بعد کے لیے عمل کرے؛ اور عاجز وہ ہے جو اپنی خواہشات کی پیروی کرے پھر اللہ سے تمنائیں رکھے۔' (ترمذی — حسن)"
     },
     l5: {
       seed: "No accounting is final until the one with complete authority settles it — human judgment, however powerful, is always partial and provisional.",
@@ -149,10 +153,11 @@ const LENS_1 = {
     },
     l4: {
       ayat: [
-        { ref: "51:56", text: "And I did not create the jinn and mankind except to worship Me." },
-        { ref: "3:160", text: "If Allah should aid you, no one can overcome you; but if He should forsake you, who is there that can aid you after Him?" }
+        { ref: "51:56", text: "And I did not create the jinn and mankind except to worship Me.", text_ur: "اور میں نے جنوں اور انسانوں کو صرف اس لیے پیدا کیا کہ وہ میری عبادت کریں۔" },
+        { ref: "3:160", text: "If Allah should aid you, no one can overcome you; but if He should forsake you, who is there that can aid you after Him?", text_ur: "اگر اللہ تمہاری مدد کرے تو کوئی تم پر غالب نہیں آ سکتا؛ اور اگر وہ تمہیں چھوڑ دے تو اس کے بعد کون ہے جو تمہاری مدد کر سکے؟" }
       ],
-      hadith: "Allah said: 'I have divided the prayer into two halves between Myself and My servant. When the servant says: You alone we worship and You alone we ask for help — Allah says: This is between Me and My servant, and My servant shall have what he asked.' (Sahih Muslim — Hadith Qudsi)"
+      hadith: "Allah said: 'I have divided the prayer into two halves between Myself and My servant. When the servant says: You alone we worship and You alone we ask for help — Allah says: This is between Me and My servant, and My servant shall have what he asked.' (Sahih Muslim — Hadith Qudsi)",
+      hadith_ur: "اللہ نے فرمایا: 'میں نے نماز اپنے اور اپنے بندے کے درمیان دو حصوں میں تقسیم کی ہے۔ جب بندہ کہتا ہے: صرف تیری عبادت کرتے ہیں اور صرف تجھ سے مدد مانگتے ہیں — تو اللہ فرماتا ہے: یہ میرے اور میرے بندے کے درمیان ہے، اور میرے بندے کو وہ ملے گا جو اس نے مانگا۔' (صحیح مسلم — حدیثِ قدسی)"
     },
     l5: {
       seed: "True freedom is not the absence of dependence, but the placement of dependence correctly — the one who relies only on Allah is freer than the one who relies on everything else.",
@@ -181,10 +186,11 @@ const LENS_1 = {
     },
     l4: {
       ayat: [
-        { ref: "4:69", text: "And whoever obeys Allah and the Messenger — those will be with the ones upon whom Allah has bestowed favor of the prophets, the steadfast affirmers of truth, the martyrs and the righteous. And excellent are those as companions." },
-        { ref: "3:8", text: "Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy. Indeed, You are the Bestower." }
+        { ref: "4:69", text: "And whoever obeys Allah and the Messenger — those will be with the ones upon whom Allah has bestowed favor of the prophets, the steadfast affirmers of truth, the martyrs and the righteous. And excellent are those as companions.", text_ur: "اور جو اللہ اور رسول کی اطاعت کرے — وہ ان لوگوں کے ساتھ ہوگا جن پر اللہ نے انعام کیا: انبیاء، صدیقین، شہداء اور صالحین۔ اور یہ کتنے اچھے ساتھی ہیں۔" },
+        { ref: "3:8", text: "Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy. Indeed, You are the Bestower.", text_ur: "اے ہمارے رب، ہمارے دلوں کو ٹیڑھا نہ کر جب کہ تو نے ہمیں ہدایت دے دی ہے، اور ہمیں اپنی طرف سے رحمت عطا فرما۔ بے شک تو ہی سب کچھ دینے والا ہے۔" }
       ],
-      hadith: "The Prophet ﷺ said: 'Allah has set an example: a straight path flanked by two walls with open doors within them. The path is Islam, the walls are Allah's limits, the open doors are His prohibitions, and the caller at the entrance of the path is the Book of Allah.' (Ahmad — sahih)"
+      hadith: "The Prophet ﷺ said: 'Allah has set an example: a straight path flanked by two walls with open doors within them. The path is Islam, the walls are Allah's limits, the open doors are His prohibitions, and the caller at the entrance of the path is the Book of Allah.' (Ahmad — sahih)",
+      hadith_ur: "نبی ﷺ نے فرمایا: 'اللہ نے ایک مثال بیان کی ہے: ایک سیدھا راستہ جس کے دونوں طرف دیواریں ہیں اور ان میں کھلے دروازے ہیں۔ یہ راستہ اسلام ہے، دیواریں اللہ کی حدیں ہیں، کھلے دروازے اس کی منع کردہ چیزیں ہیں، اور راستے کے دہانے پر بلانے والا اللہ کی کتاب ہے۔' (احمد — صحیح)"
     },
     l5: {
       seed: "Guidance is not a destination you arrive at and keep forever — it is a relationship that must be sustained through continuous asking, attention, and return.",
@@ -213,10 +219,11 @@ const LENS_1 = {
     },
     l4: {
       ayat: [
-        { ref: "4:69-70", text: "And whoever obeys Allah and the Messenger — those will be with the ones upon whom Allah has bestowed favor: of the prophets, the steadfast affirmers of truth, the martyrs, and the righteous. And excellent are those as companions. That is the bounty from Allah, and sufficient is Allah as Knower." },
-        { ref: "5:60", text: "Say: Shall I inform you of what is worse than that as penalty from Allah? It is those whom Allah has cursed and with whom He became angry." }
+        { ref: "4:69-70", text: "And whoever obeys Allah and the Messenger — those will be with the ones upon whom Allah has bestowed favor: of the prophets, the steadfast affirmers of truth, the martyrs, and the righteous. And excellent are those as companions. That is the bounty from Allah, and sufficient is Allah as Knower.", text_ur: "اور جو اللہ اور رسول کی اطاعت کرے — وہ ان لوگوں کے ساتھ ہوگا جن پر اللہ نے انعام کیا: انبیاء، صدیقین، شہداء اور صالحین۔ اور یہ کتنے اچھے ساتھی ہیں۔ یہ اللہ کی طرف سے فضل ہے، اور کافی ہے اللہ جاننے والا۔" },
+        { ref: "5:60", text: "Say: Shall I inform you of what is worse than that as penalty from Allah? It is those whom Allah has cursed and with whom He became angry.", text_ur: "کہو: کیا میں تمہیں بتاؤں کہ اللہ کے ہاں اس سے بدتر سزا کس کے لیے ہے؟ وہ جن پر اللہ نے لعنت کی اور جن پر وہ غضبناک ہوا۔" }
       ],
-      hadith: "The Prophet ﷺ said to 'Adi bin Hatim: 'Those who earned anger are the Jews, and those who went astray are the Christians.' (Tirmidhi — hasan gharib, narrated by 'Adi bin Hatim)"
+      hadith: "The Prophet ﷺ said to 'Adi bin Hatim: 'Those who earned anger are the Jews, and those who went astray are the Christians.' (Tirmidhi — hasan gharib, narrated by 'Adi bin Hatim)",
+      hadith_ur: "نبی ﷺ نے عدی بن حاتم سے فرمایا: 'جن پر غضب ہوا وہ یہود ہیں، اور جو گمراہ ہوئے وہ نصاریٰ ہیں۔' (ترمذی — حسن غریب، روایت عدی بن حاتم)"
     },
     l5: {
       seed: "Knowledge without action leads to corruption of the soul; sincere effort without true guidance leads to wandering — the healthy soul needs both truth and the will to live by it.",

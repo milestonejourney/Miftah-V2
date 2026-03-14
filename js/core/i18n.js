@@ -165,6 +165,9 @@ function renderSurahStrings() {
   set('surah-heart-filter-title',strings.heartFilterTitle[idx]);
   set('surah-heart-filter-body', strings.heartFilterBody[idx]);
 
+  // Update page title
+  document.title = 'Miftah · ' + strings.name[idx];
+
   // Ayah count never translates — always "N Ayahs"
   const countEl = document.getElementById('surah-ayah-count-display');
   if (countEl) countEl.textContent = DataService.getAyahCount() + ' Ayahs';

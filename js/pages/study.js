@@ -544,7 +544,10 @@ function _renderNavDropdown(currentNum) {
   const dropdown = document.getElementById('ayah-dropdown');
   if (!dropdown) return;
 
-  if (!dropdown.dataset.rendered) {
+  // Rebuild if surah has changed since last render
+  const surah = String(App.state.currentSurah);
+  if (dropdown.dataset.renderedSurah !== surah) {
+    dropdown.innerHTML = '';
     const total = DataService.getAyahCount();
     for (let i = 1; i <= total; i++) {
       const btn = document.createElement('button');
@@ -555,7 +558,7 @@ function _renderNavDropdown(currentNum) {
       btn.onclick = () => { closeDropdown(); goToAyah(i); };
       dropdown.appendChild(btn);
     }
-    dropdown.dataset.rendered = 'true';
+    dropdown.dataset.renderedSurah = surah;
   }
 
   // Update active state

@@ -136,13 +136,13 @@
 }
 
 /* ── Language-specific Arabic text scaling ────────────────── */
-[data-lang="ur"]    { --sz-arabic: 38px; }
-[data-lang="ur-hi"] { --sz-arabic: 36px; }
+[data-lang="ur"]    { --sz-arabic: 38px; --sz-translation: 22px; }
+[data-lang="ur-hi"] { --sz-arabic: 36px; --sz-translation: 20px; }
 
-[data-lang="ur"][data-text-size="sm"]    { --sz-arabic: 30px; }
-[data-lang="ur"][data-text-size="lg"]    { --sz-arabic: 46px; }
-[data-lang="ur-hi"][data-text-size="sm"] { --sz-arabic: 28px; }
-[data-lang="ur-hi"][data-text-size="lg"] { --sz-arabic: 44px; }
+[data-lang="ur"][data-text-size="sm"]    { --sz-arabic: 30px; --sz-translation: 18px; }
+[data-lang="ur"][data-text-size="lg"]    { --sz-arabic: 46px; --sz-translation: 26px; }
+[data-lang="ur-hi"][data-text-size="sm"] { --sz-arabic: 28px; --sz-translation: 16px; }
+[data-lang="ur-hi"][data-text-size="lg"] { --sz-arabic: 44px; --sz-translation: 24px; }
 
 /* ── Arabic text shaping — applies to all KFGQPC elements ─── */
 /* Forces correct OpenType shaping for Uthmanic combining marks */
@@ -165,14 +165,14 @@
 [data-lang="ur"] .translation {
   font-family: 'Noto Nastaliq Urdu', serif;
   direction: rtl;
-  text-align: right;
+  text-align: center;
   line-height: 2.4;
 }
 
 [data-lang="ur-hi"] .translation {
   font-family: 'Noto Sans Devanagari', sans-serif;
   direction: ltr;
-  text-align: left;
+  text-align: center;
 }
 
 /* RTL UI adjustment for Urdu language mode */
