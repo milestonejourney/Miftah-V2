@@ -1517,7 +1517,14 @@ a:hover { color: var(--gold-light); }
   overflow-x: auto;
   scrollbar-width: none;
   padding-bottom: 2px;
-  justify-content: center;
+  /* flex-start ensures overflowed tabs are reachable by scrolling.
+     justify-content: center clips the start on small screens. */
+  justify-content: flex-start;
+}
+
+/* Center tabs only when they comfortably fit — no overflow risk */
+@media (min-width: 600px) {
+  #lens-tabs { justify-content: center; }
 }
 
 #lens-tabs::-webkit-scrollbar { display: none; }
