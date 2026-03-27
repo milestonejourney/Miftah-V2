@@ -92,6 +92,26 @@ function migrateFromLegacyStore() {
   console.log('store: migrated from legacy key miftah_v1_s67');
 }
 
+// Purge any vocab entries with ayah === 0 from all surahs.
+// These were saved during an early bug where ayahNum was unset.
+// Called once on startup alongside migrateFromLegacyStore().
+function purgeAyah0Vocab() {
+  const data = loadStore();
+  if (!data.surahs) return;
+  let dirty = false;
+  Object.keys(data.surahs).forEach(num => {
+    const sd = data.surahs[num];
+    if (!sd.vocab || !sd.vocab.length) return;
+    const before = sd.vocab.length;
+    sd.vocab = sd.vocab.filter(w => w.ayah && w.ayah >= 1);
+    if (sd.vocab.length !== before) dirty = true;
+  });
+  if (dirty) {
+    saveStore(data);
+    console.log('store: purged ayah-0 vocab entries');
+  }
+}
+
 // Returns the per-surah slice, creating it if absent.
 // surahNum defaults to App.state.currentSurah.
 function _surahStore(surahNum) {
@@ -242,6 +262,7 @@ function isWordSaved(arabic, ayah, surahNum) {
 
 function saveWord(wordObj, surahNum) {
   // wordObj: { arabic, translation, root, pos, ayah }
+  if (!wordObj.ayah || wordObj.ayah < 1) return false; // guard: reject legacy ayah-0 saves
   if (isWordSaved(wordObj.arabic, wordObj.ayah, surahNum)) return false;
   const sd = _surahStore(surahNum);
   if (!sd.vocab) sd.vocab = [];

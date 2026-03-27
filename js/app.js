@@ -224,6 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 0b. Migrate legacy storage key (miftah_v1_s67 → miftah_v1) — runs once, no-ops after
   migrateFromLegacyStore();
+  purgeAyah0Vocab();
 
   // 1. Apply persisted preferences immediately — no flash
   initTheme();
