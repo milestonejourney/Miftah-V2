@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-text-size="md" data-lang="en">
+<html lang="en" data-theme="dark" data-text-size="md" data-lang="en"><!-- theme.js resolves system preference on load -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -208,6 +208,9 @@
       <p class="settings-section-title">Theme</p>
       <div class="settings-btn-group">
         <button class="settings-btn active"
+                onclick="setTheme('system')"
+                data-theme-btn="system">System</button>
+        <button class="settings-btn"
                 onclick="setTheme('dark')"
                 data-theme-btn="dark">Dark</button>
         <button class="settings-btn"

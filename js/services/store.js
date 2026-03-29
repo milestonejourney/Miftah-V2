@@ -61,7 +61,7 @@ function migrateFromLegacyStore() {
 
   // Lift global preferences to top level
   const migrated = {
-    theme:           old.theme       || 'dark',
+    theme:           old.theme       || 'system',
     lang:            old.lang        || 'en',
     textSize:        old.textSize    || 'md',
     onboarding_seen: old.onboarding_seen || false,
@@ -281,7 +281,7 @@ function removeWord(arabic, ayah, surahNum) {
 // ── Preferences (global — not per-surah) ─────────────────
 
 function loadTheme() {
-  return loadStore().theme || 'dark';
+  return loadStore().theme || 'system';
 }
 
 function saveTheme(theme) {
